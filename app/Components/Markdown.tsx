@@ -16,7 +16,7 @@ const MarkdownContent = ({ rawText }: Props) => {
     const clean = DOMPurify.sanitize(result);
 
     return (
-        <div className="prose prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: clean }}></div>
+        <div className="prose prose-sm prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: clean }}></div>
     );
 }
 
