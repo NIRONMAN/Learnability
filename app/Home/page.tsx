@@ -19,6 +19,9 @@ export default function Page() {
             handleSubmit(e, {
               data: {
                 prompt: input,
+                context:JSON.stringify(messages.map((message)=>{
+                  return message.content;
+                }).join("\n"))
               },
             });
           }}
