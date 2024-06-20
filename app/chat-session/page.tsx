@@ -6,12 +6,12 @@ type Props = {}
 
 const page = (props: Props) => {
 
-  const [isDragging,setIsDragging] =  useState(false)
-  const [leftPannelWidth, setLeftPannelWidth] = useState(null)
-  const [leftPannel, setLeftPannel] = useState(null)
-  const [rightPannelWidth, setRightPannelWidth] = useState(null)
-  const [rightPannel, setRightPannel] = useState(null)
-  const [splitterX,setSplitterX] = useState(0)
+  const [isDragging,setIsDragging] =  useState<any>(false)
+  const [leftPannelWidth, setLeftPannelWidth] = useState<any>(null)
+  const [leftPannel, setLeftPannel] = useState<any>(null)
+  const [rightPannelWidth, setRightPannelWidth] = useState<any>(null)
+  const [rightPannel, setRightPannel] = useState<any>(null)
+  const [splitterX,setSplitterX] = useState<any>(0)
 
   const [showPdf,setShowPdf] = useState('hidden')
   
