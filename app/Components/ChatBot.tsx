@@ -1,11 +1,33 @@
 "use client";
 
-import React from "react";
+import React,{useState} from "react";
 import { useChat } from "@ai-sdk/react";
 import MessageList from "../Components/MessageList";
+import {PaperClipOutlined} from '@ant-design/icons'
+import {Upload} from 'antd'
 
-export default function ChatBot() {
+export default function ChatBot(props:any) {
   const { messages, input, handleInputChange, handleSubmit } = useChat({ api: "api/v1" });
+  const [noOfFiles,setNoOfFiles] = useState(0)
+
+  console.log(props)
+  const uploadHalndler = (e:any)=>{
+    console.log(e.file)
+    setNoOfFiles(noOfFiles+1)
+    const file = e.file
+    props.setupload(true)
+    const reader = new FileReader()
+    reader.readAsArrayBuffer(file)
+    reader.onload=()=>{
+      this.setState({fileName:file.name , fileContent:reader.result})
+    }
+    reader.onerror=()=>{
+      console.log('file error',reader.error)
+    }
+
+    console.log(reader.result)
+
+  }
 
   return (
     <div className="h-screen flex flex-col bg-[#212121] items-center">
@@ -35,6 +57,11 @@ export default function ChatBot() {
               onChange={(e) => handleInputChange(e)}
               placeholder="Type your message..."
             />
+            <div className="bg-[#3f3f3f] py-1 px-2 rounded-lg hover:cursor-pointer">
+              <Upload onChange={uploadHalndler} showUploadList={false}>
+                <PaperClipOutlined style={{color:'white',fontSize:'1rem'}}/>
+              </Upload>
+            </div>
             <button
               type="submit"
               className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded-lg"
