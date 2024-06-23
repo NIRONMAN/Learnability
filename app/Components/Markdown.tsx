@@ -1,7 +1,7 @@
 import React from 'react';
 import markdownit from 'markdown-it';
 import DOMPurify from 'dompurify';
-import 'tailwindcss/tailwind.css'; // Ensure Tailwind CSS is imported
+import 'tailwindcss/tailwind.css'; 
 
 const md = markdownit({
         linkify:true

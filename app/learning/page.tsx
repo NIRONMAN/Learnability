@@ -1,10 +1,11 @@
 "use client"
 import React,{useState,useEffect,useRef} from 'react'
 import ChatBot from '../Components/ChatBot'
+import MessageList2 from '../Components/MessageList2'
 
 type Props = {}
 
-const page = (props: Props) => {
+const pageofSession = (props: Props) => {
 
   const [isDragging,setIsDragging] =  useState<any>(false)
   const [leftPannelWidth, setLeftPannelWidth] = useState<any>(null)
@@ -13,7 +14,7 @@ const page = (props: Props) => {
   const [rightPannel, setRightPannel] = useState<any>(null)
   const [splitterX,setSplitterX] = useState<any>(0)
 
-  const [showPdf,setShowPdf] = useState('hidden')
+  const [showPdf,setShowPdf] = useState<any>('hidden')
   
 
   const onMouseDown = ((e:any)=>{
@@ -57,16 +58,18 @@ const page = (props: Props) => {
 
 
   return (
+    
     <div className='w-full flex flex-row'>
       <div className={`h-full ${showPdf}`}>
-        <h1>Hello, world!</h1>
+        <h1 className=' text-white'>Hello, world!</h1>
       </div>
       <div className={`bg-gray-400 h-screen w-1 hover:cursor-col-resize ${showPdf}`} onMouseDown={onMouseDown}></div>
       <div className='h-full w-full justify-end'>
-        <ChatBot setupload={setShowPdf}></ChatBot>
+        {/* <ChatBot setupload={setShowPdf}></ChatBot> */}
+        <ChatBot MessageList={MessageList2}></ChatBot>
       </div>
     </div>
   )
 }
 
-export default page
+export default pageofSession
