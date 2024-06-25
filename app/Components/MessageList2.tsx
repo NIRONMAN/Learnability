@@ -10,7 +10,7 @@ function MessageList({ arr }: Props) {
 
     return (
         <div id="chatElement" className="text-white flex flex-col">
-            {arr.map((element: any, index: number) => (
+            {arr?.map((element: any, index: number) => (
                 <div
                     key={element.id}
                     className={`${

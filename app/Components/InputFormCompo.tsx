@@ -1,7 +1,12 @@
+"use client"
 import revisionSystemPrompt from '@/lib/revisionSystemPrompt';
 import { PaperClipOutlined } from '@ant-design/icons';
 import { Upload } from 'antd';
 import React, { useState } from 'react';
+
+import { useSelector,useDispatch } from 'react-redux'
+import type { RootState } from '../GlobalRedux/store'
+import {showPdf,hidePdf,setPdf} from '../GlobalRedux/Features/counter/counterSlice'
 
 interface Message {
   content: string,
@@ -19,24 +24,30 @@ interface Props {
 
 const InputFormCompo: React.FC<Props> = ({ handleInputChange, handleSubmit, input, messages, setUpload }) => {
   const [noOfFiles, setNoOfFiles] = useState<number>(0);
+  const dispatch = useDispatch()
 
-  const uploadHandler :any= (e: React.ChangeEvent<unknown>) => {
-    const event = e as React.ChangeEvent<HTMLInputElement>;
-    // console.log(event.target.files?.[0]);
-    if (event.target.files && event.target.files.length > 0) {
-      setNoOfFiles(noOfFiles + 1);
-      const file = event.target.files[0];
-      setUpload(true);
-      const reader = new FileReader();
-      reader.readAsArrayBuffer(file);
-      reader.onload = () => {
-        console.log(reader.result);
-      };
-      reader.onerror = () => {
-        console.log('file error', reader.error);
-      };
+  const uploadHandler :any= (e:UploadChangeParam) => {
+
+    setNoOfFiles(noOfFiles + 1)
+
+
+    const file = e.file.originFileObj
+
+    if(file.type!=="application/pdf"){
+      return
     }
-  };
+    const reader = new FileReader();
+    reader.readAsDataURL(file)
+    reader.onload = (eve)=>{
+
+      dispatch(setPdf(eve.target?.result as string))
+      dispatch(showPdf())
+      
+    }
+    reader.onerror= (error)=>{
+      console.log('error=',error)
+    }
+  ;}
 
   return (
     <div>
