@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import MarkdownContent from './Markdown';
 import { useSuggestions } from './SuggestionsContext';
 import { Button } from 'antd';
@@ -9,6 +9,7 @@ interface Props {
 
 function MessageList({ arr }: Props) {
     const { setCurrentSuggestions, showHint, setShowHint } = useSuggestions();
+    const messagesEndRef = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
         const latestAssistantMessage = arr.slice().reverse().find(message => message.role === 'assistant');
@@ -18,6 +19,7 @@ function MessageList({ arr }: Props) {
                 setCurrentSuggestions(parsedContent);
             }
         }
+        scrollToBottom();
     }, [arr, setCurrentSuggestions]);
 
     const parseContent = (content: string) => {
@@ -27,6 +29,12 @@ function MessageList({ arr }: Props) {
             return JSON.parse(sanitizedContent);
         } catch (error) {
             return null;
+        }
+    };
+
+    const scrollToBottom = () => {
+        if (messagesEndRef.current) {
+            messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
         }
     };
 
@@ -60,6 +68,7 @@ function MessageList({ arr }: Props) {
                     </div>
                 );
             })}
+            <div ref={messagesEndRef} />
         </div>
     );
 }

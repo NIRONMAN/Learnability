@@ -19,7 +19,7 @@ const RevisingPage = () => {
   const router = useRouter();
   const [initialMessages, setInitialMessages] = useState<any[]>([]);
   const [historyvar, setHistory] = useState<historyType[]>([]);
-  const { messages, input, handleInputChange, handleSubmit, isLoading, setMessages } = useChat({
+  const { messages, input, handleInputChange, handleSubmit, isLoading, setMessages,setInput } = useChat({
     api: "api/v1",
     initialMessages: initialMessages
   });
@@ -97,10 +97,17 @@ const RevisingPage = () => {
           handleSubmit={handleSubmit}
           input={input}
           messages={messages}
+          isLoading={isLoading}
         />
 
         <div className="col-span-1 bg-[#333333] flex flex-col items-center">
           <h1 className='p-4'>Suggestions</h1>
+          <div className='flex flex-grow flex-col gap-2'>
+            <Button type='dashed' onClick={()=>setInput("Skip this Question")}>Skip this Question</Button>
+            <Button type='dashed' onClick={()=>setInput("Explain further")}>Explain further</Button>
+            
+            <Button type='dashed' onClick={()=>setInput("Move to next topic")}>Move to next topic</Button>
+          </div>
           <Suggestions />
         </div>
       </div>

@@ -5,7 +5,7 @@ const Suggestions: React.FC = () => {
     const { currentSuggestions } = useSuggestions();
 
     return (
-        <div className="suggestions">
+        <div className=" p-4">
             {currentSuggestions ? (
                 <div>
                     {currentSuggestions.totalQuestions !== undefined && (
