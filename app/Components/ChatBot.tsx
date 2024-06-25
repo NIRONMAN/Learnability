@@ -1,11 +1,8 @@
 import React, { useState } from "react";
-import { useChat } from "@ai-sdk/react";
 import InputFormCompo from "./InputFormCompo";
 
-export default function ChatBot({MessageList}) {
-  const { messages, input, handleInputChange, handleSubmit } = useChat({
-    api: "api/v1",
-  });
+export default function ChatBot({MessageList,messages,input,handleInputChange,handleSubmit}) {
+  
 
   return (
     <div className="h-screen flex flex-col bg-[#232323] items-center col-span-3">

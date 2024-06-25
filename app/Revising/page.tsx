@@ -1,34 +1,111 @@
-//Note
-//This is a page where the user is Revising the content so this does not have to show the pdf
-//this will have the question answer format only and that related suuff
-"use client"
-import React from 'react'
-import ChatBot from '../Components/ChatBot'
-import { SuggestionsProvider } from '../Components/SuggestionsContext'
-import Suggestions from '../Components/Suggestions'
-import MessageList from '../Components/MessageList'
+"use client";
+import React, { useEffect, useState } from 'react';
+import ChatBot from '../Components/ChatBot';
+import { SuggestionsProvider } from '../Components/SuggestionsContext';
+import Suggestions from '../Components/Suggestions';
+import MessageList from '../Components/MessageList';
+import { Button } from 'antd';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useChat } from "@ai-sdk/react";
+import HistoryCompo from '../Components/HistoryCompo';
+import { createSession, getHistory, getSession, updateHistory, updateSession } from '@/utils/functions';
 
-type Props = {}
-
-const page = (props: Props) => {
-  return (
-    <SuggestionsProvider >
-
-<div className="h-screen bg-[#121212] grid grid-cols-5 text-white">
-      {/* First column */}
-      <div className="col-span-1 bg-[#333333] flex justify-center "><h1>History</h1></div>
-
-      {/* Second column - Main content area */}
-      <ChatBot MessageList={MessageList}></ChatBot>
-
-      {/* Third column */}
-      <div className="col-span-1 bg-[#333333] flex flex-col items-center"><h1>Suggestions</h1>
-      <Suggestions></Suggestions>
-      </div>
-    </div>
-    </SuggestionsProvider>
-  )
+interface historyType {
+  title: string;
+  sessionId: string;
 }
 
-export default page
+const RevisingPage = () => {
+  const router = useRouter();
+  const [initialMessages, setInitialMessages] = useState<any[]>([]);
+  const [historyvar, setHistory] = useState<historyType[]>([]);
+  const { messages, input, handleInputChange, handleSubmit, isLoading, setMessages } = useChat({
+    api: "api/v1",
+    initialMessages: initialMessages
+  });
+  const searchParams = useSearchParams();
+  const sessionId = searchParams.get('sessionId');
+ useEffect(()=>{
+  getHistory().then((res)=>{
+    console.log("in get"+res)
+    if(res){
+      setHistory(res)
+    }
+  })
+ },[])
+  // Fetch session data when sessionId changes
+  useEffect(() => {
+   
+    if (sessionId && sessionId !== "new-Chat") {
+      getSession(sessionId).then((response) => {
+        setInitialMessages(response);
+        setMessages(response);
+      });
+    } else {
+      setInitialMessages([]);
+      setMessages([]);
+    }
+  }, [sessionId, setMessages]);
 
+  // Handle session creation
+  const handleCreateSession = async () => {
+    if (!sessionId || sessionId === "new-Chat") {
+      // Create a new session
+      const newSessionId = await createSession({ messages: messages });
+      if (newSessionId) {
+        setHistory((prev) => [...prev, { sessionId: newSessionId, title: "First Chat" }])
+        updateHistory([...historyvar,{ sessionId: newSessionId, title: "First Chat" }]).then((res)=>{
+          console.log("update history "+res)
+        })
+      } else {
+        console.log("Failed to create a new session");
+      }
+    } else {
+      
+      updateSession({sessionId,messages}).then(()=>{
+        console.log("Session updated successfully")
+      })
+    }
+    const pathname = "/revising";
+    const query = { sessionId: "new-Chat" }; 
+    const queryString = new URLSearchParams(query).toString();
+    setMessages([]);
+    router.replace(`${pathname}?${queryString}`);
+  };
+  
+
+  // Handle history click
+  const handleHistoryClick = (sessionId: string) => {
+    const pathname = "/revising";
+    const query = { sessionId: sessionId }; 
+    const queryString = new URLSearchParams(query).toString();
+    router.push(`${pathname}?${queryString}`);
+  };
+
+  return (
+    <SuggestionsProvider>
+      <div className="h-screen bg-[#121212] grid grid-cols-5 text-white">
+        <div className="col-span-1 bg-[#333333] flex flex-col items-center">
+          <h1 className='p-4'>History</h1>
+          <Button onClick={handleCreateSession}>Create New Chat</Button>
+          <HistoryCompo arr={historyvar} onHistoryClick={handleHistoryClick} />
+        </div>
+
+        <ChatBot 
+          MessageList={MessageList}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          input={input}
+          messages={messages}
+        />
+
+        <div className="col-span-1 bg-[#333333] flex flex-col items-center">
+          <h1 className='p-4'>Suggestions</h1>
+          <Suggestions />
+        </div>
+      </div>
+    </SuggestionsProvider>
+  );
+}
+
+export default RevisingPage;

@@ -1,3 +1,4 @@
+import revisionSystemPrompt from '@/lib/revisionSystemPrompt';
 import { PaperClipOutlined } from '@ant-design/icons';
 import { Upload } from 'antd';
 import React, { useState } from 'react';
@@ -9,7 +10,7 @@ interface Message {
 }
 
 interface Props {
-  handleSubmit: (event: React.FormEvent<HTMLFormElement>, data: { data: { prompt: string; context: string } }) => void;
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>, data: { data: { prompt: string; context: string ;systemPrompt:string} }) => void;
   messages: Message[];
   input: string;
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -44,6 +45,7 @@ const InputFormCompo: React.FC<Props> = ({ handleInputChange, handleSubmit, inpu
           e.preventDefault();
           handleSubmit(e, {
             data: {
+              systemPrompt:revisionSystemPrompt,
               prompt: input,
               context: JSON.stringify(
                 messages.map((message: Message) => {

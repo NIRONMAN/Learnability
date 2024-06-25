@@ -24,10 +24,8 @@ function MessageList({ arr }: Props) {
         try {
             // Remove Markdown formatting
             const sanitizedContent = content.replace(/```json|```/g, '').trim();
-            console.log("Attempting to parse sanitized content:", sanitizedContent);
             return JSON.parse(sanitizedContent);
         } catch (error) {
-            console.error("Failed to parse content:", content, error);
             return null;
         }
     };
