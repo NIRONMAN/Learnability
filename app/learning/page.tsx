@@ -75,7 +75,7 @@ const pageofSession = (props: Props) => {
 
   return (
     <div className='w-full flex flex-row'>
-      <div className={`h-w-2/4 ${show? 'hidden' : ''}`} >
+      <div className={`h-screen overflow-y-auto w-2/4 ${show? 'hidden' : ''}`} >
 
         {/* <h1></h1> */}
         {
@@ -99,7 +99,7 @@ const pageofSession = (props: Props) => {
         }
       </div>
       <div className={`bg-gray-400 h-screen w-1 hover:cursor-col-resize ${show?'hidden':''}`} onMouseDown={onMouseDown}></div>
-      <div className='h-full w-full justify-end'>
+      <div className='w-full justify-end'>
         <ChatBot MessageList={MessageList2}></ChatBot>
       </div>
     </div>
