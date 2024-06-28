@@ -82,5 +82,18 @@ const getHistory=async ():Promise<any>=>{
         return null
     }
 }
+
+
+const uploadFile=async ():Promise<any>=>{
+    // const fileBuffer=fs.readFileSync(outputFilePath)
+    // const storageRef=ref(storage, `audio/${path.basename(outputFilePath)}`)
+    // const metadata = {
+    //   contentType: 'audio/mp3'
+    // };
+
+    // await uploadBytes(storageRef,fileBuffer,metadata);
+    // const publicURL=await getDownloadURL(storageRef)
+}
+
 export { createSession, getSession, updateSession,updateHistory,getHistory };
 export type { CreateTypes };

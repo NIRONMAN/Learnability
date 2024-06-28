@@ -2,10 +2,11 @@
 
 import {configureStore} from '@reduxjs/toolkit'
 import counterReducer from './Features/counter/counterSlice'
-
+import stringReducer from "./Features/string/stringSlice"
 export const store =configureStore({
     reducer:{
-        counter:counterReducer
+        counter:counterReducer,
+        string:stringReducer
     }
 })
 

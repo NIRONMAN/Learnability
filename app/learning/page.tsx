@@ -2,6 +2,7 @@
 import React,{useState,useEffect,useRef} from 'react'
 import ChatBot,{} from '../Components/ChatBot'
 import MessageList2 from '../Components/MessageList2'
+import { useChat } from "@ai-sdk/react";
 
 import {Viewer,Worker} from '@react-pdf-viewer/core'
 import {defaultLayoutPlugin} from '@react-pdf-viewer/default-layout'
@@ -9,14 +10,23 @@ import '@react-pdf-viewer/core/lib/styles/index.css'
 import '@react-pdf-viewer/default-layout/lib/styles/index.css'
 import { useSelector,useDispatch } from 'react-redux'
 import type { RootState } from '../GlobalRedux/store'
-import {showPdf,hidePdf,setPdf} from '../GlobalRedux/Features/counter/counterSlice'
+import { updateString } from '../GlobalRedux/Features/string/stringSlice';
+import learningSystemPrompt from '@/lib/learningSystemPrompt';
 
 
 type Props = {}
 
 const pageofSession = (props: Props) => {
-  const defaultLayoutPluginInstance = defaultLayoutPlugin();
   const dispatch = useDispatch()
+  const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
+    api: "api/v1",
+    initialMessages: []
+  });
+  useEffect(()=>{
+    dispatch(updateString(learningSystemPrompt))
+
+  },[])
+  const defaultLayoutPluginInstance = defaultLayoutPlugin();
   const show = useSelector((state:RootState)=>state.counter.value)
   const pdf = useSelector((state:RootState)=>state.counter.file)
   // console.log(show)
@@ -100,10 +110,20 @@ const pageofSession = (props: Props) => {
       </div>
       <div className={`bg-gray-400 h-screen w-1 hover:cursor-col-resize ${show?'hidden':''}`} onMouseDown={onMouseDown}></div>
       <div className='w-full justify-end'>
-        <ChatBot MessageList={MessageList2}></ChatBot>
+        
+      <ChatBot 
+          MessageList={MessageList2}
+          handleInputChange={handleInputChange}
+          handleSubmit={handleSubmit}
+          input={input}
+          messages={messages}
+          isLoading={isLoading}
+        />
       </div>
     </div>
   )
 }
 
 export default pageofSession
+
+

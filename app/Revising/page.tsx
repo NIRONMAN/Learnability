@@ -9,6 +9,9 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { useChat } from "@ai-sdk/react";
 import HistoryCompo from '../Components/HistoryCompo';
 import { createSession, getHistory, getSession, updateHistory, updateSession } from '@/utils/functions';
+import { useDispatch } from 'react-redux';
+import { updateString } from '../GlobalRedux/Features/string/stringSlice';
+import revisionSystemPrompt from '@/lib/revisionSystemPrompt';
 
 interface historyType {
   title: string;
@@ -16,6 +19,7 @@ interface historyType {
 }
 
 const RevisingPage = () => {
+  const dispatch=useDispatch();
   const router = useRouter();
   const [initialMessages, setInitialMessages] = useState<any[]>([]);
   const [historyvar, setHistory] = useState<historyType[]>([]);
@@ -26,8 +30,9 @@ const RevisingPage = () => {
   const searchParams = useSearchParams();
   const sessionId = searchParams.get('sessionId');
  useEffect(()=>{
+  dispatch(updateString(revisionSystemPrompt))
   getHistory().then((res)=>{
-    console.log("in get"+res)
+    console.log("Session information got succesfully")
     if(res){
       setHistory(res)
     }
@@ -90,7 +95,6 @@ const RevisingPage = () => {
           <Button onClick={handleCreateSession}>Create New Chat</Button>
           <HistoryCompo arr={historyvar} onHistoryClick={handleHistoryClick} />
         </div>
-
         <ChatBot 
           MessageList={MessageList}
           handleInputChange={handleInputChange}

@@ -23,10 +23,11 @@ interface Props {
 }
 
 const InputFormCompo: React.FC<Props> = ({ handleInputChange, handleSubmit, input, messages, setUpload }) => {
+  const systemPrompt=useSelector((state:RootState)=>state.string.value)
   const [noOfFiles, setNoOfFiles] = useState<number>(0);
   const dispatch = useDispatch()
-
-  const uploadHandler :any= (e:UploadChangeParam) => {
+  
+  const uploadHandler :any= (e:any) => {
 
     setNoOfFiles(noOfFiles + 1)
 
@@ -56,7 +57,7 @@ const InputFormCompo: React.FC<Props> = ({ handleInputChange, handleSubmit, inpu
           e.preventDefault();
           handleSubmit(e, {
             data: {
-              systemPrompt:revisionSystemPrompt,
+              systemPrompt:systemPrompt,
               prompt: input,
               context: JSON.stringify(
                 messages.map((message: Message) => {
