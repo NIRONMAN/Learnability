@@ -1,6 +1,0 @@
-{
-  "/page": "app/page.js",
-  "/youtube/page": "app/youtube/page.js",
-  "/api/extract/route": "app/api/extract/route.js",
-  "/api/v1/route": "app/api/v1/route.js"
-}
