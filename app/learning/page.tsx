@@ -122,7 +122,7 @@ const PageOfSession = (props: Props) => {
             <div>No PDF selected</div>
           ) : (
             pdf ? (
-              <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.4.120/build/pdf.worker.min.js">
+              <Worker workerUrl="https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js">
                 <div style={{ height: '750px', position: 'relative' }}>
                   <Viewer
                     fileUrl={pdf}
@@ -150,7 +150,7 @@ const PageOfSession = (props: Props) => {
         }
       </div>
       <div className={`bg-gray-400 h-screen w-1 hover:cursor-col-resize ${show ? 'hidden' : ''}`} onMouseDown={onMouseDown}></div>
-      <div className='w-full justify-end'>
+      {show?<div className='w-full justify-end'>
         
       <ChatBot 
           MessageList={MessageList2}
@@ -161,6 +161,18 @@ const PageOfSession = (props: Props) => {
           isLoading={isLoading}
         />
       </div>
+     : <div className='w-2/4 justify-end'>
+        
+     <ChatBot 
+         MessageList={MessageList2}
+         handleInputChange={handleInputChange}
+         handleSubmit={handleSubmit}
+         input={input}
+         messages={messages}
+         isLoading={isLoading}
+       />
+     </div>
+    }
     </div>
   );
 }
