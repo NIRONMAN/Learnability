@@ -11,7 +11,6 @@ import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 import { useSelector, useDispatch } from 'react-redux';
 import type { RootState } from '../GlobalRedux/store';
-import { showPdf, hidePdf, setPdf } from '../GlobalRedux/Features/counter/counterSlice';
 import learningSystemPrompt from '@/lib/learningSystemPrompt';
 import { updateString } from '../GlobalRedux/Features/string/stringSlice';
 
@@ -20,15 +19,15 @@ type Props = {}
 const PageOfSession = (props: Props) => {
   const defaultLayoutPluginInstance = defaultLayoutPlugin();
 
-  const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
-    api: "api/v1",
-    initialMessages: []
-  });
+ 
   useEffect(()=>{
     dispatch(updateString(learningSystemPrompt))
 
   },[])
-
+  const { messages, input, handleInputChange, handleSubmit, isLoading } = useChat({
+    api: "api/v1",
+    initialMessages: []
+  });
   const dispatch = useDispatch();
   const show = useSelector((state: RootState) => state.counter.value);
   const pdf = useSelector((state: RootState) => state.counter.file);

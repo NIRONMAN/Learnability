@@ -3,10 +3,13 @@
 import {configureStore} from '@reduxjs/toolkit'
 import counterReducer from './Features/counter/counterSlice'
 import stringReducer from "./Features/string/stringSlice"
+import authReducer from './Features/auth/authSlice'
+
 export const store =configureStore({
     reducer:{
         counter:counterReducer,
-        string:stringReducer
+        string:stringReducer,
+        auth: authReducer
     }
 })
 

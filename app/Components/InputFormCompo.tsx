@@ -52,7 +52,7 @@ const InputFormCompo: React.FC<Props> = ({ handleInputChange, handleSubmit, inpu
 
       for (let i = 1; i <= numPages; i++) {
         const page = await pdf.getPage(i);
-        const textContent = await page.getTextContent();
+        const textContent:any = await page.getTextContent();
         const pageText = textContent.items.map(item => item.str ).join(' ');
         fullText += `${pageText} \n\n`;
       }
