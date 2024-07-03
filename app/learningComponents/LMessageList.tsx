@@ -1,11 +1,11 @@
 import React from 'react';
-import MarkdownContent from './Markdown';
+import MarkdownContent from '../Components/Markdown';
 
 interface Props {
     arr: any[];
 }
 
-function MessageList({ arr }: Props) {
+function LMessageList({ arr }: Props) {
     console.log(arr);
 
     return (
@@ -24,4 +24,4 @@ function MessageList({ arr }: Props) {
     );
 }
 
-export default MessageList;
+export default LMessageList;

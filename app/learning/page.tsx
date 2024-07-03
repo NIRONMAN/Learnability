@@ -1,7 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import ChatBot from '../Components/ChatBot';
-import MessageList2 from '../Components/MessageList2';
 import { Menu, Dropdown } from 'antd';
 import { useChat } from "@ai-sdk/react";
 
@@ -13,6 +12,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import type { RootState } from '../GlobalRedux/store';
 import learningSystemPrompt from '@/lib/learningSystemPrompt';
 import { updateString } from '../GlobalRedux/Features/string/stringSlice';
+import LMessageList from '../learningComponents/LMessageList';
 
 type Props = {}
 
@@ -153,7 +153,7 @@ const PageOfSession = (props: Props) => {
       {show?<div className='w-full justify-end'>
         
       <ChatBot 
-          MessageList={MessageList2}
+          MessageList={LMessageList}
           handleInputChange={handleInputChange}
           handleSubmit={handleSubmit}
           input={input}
@@ -164,7 +164,7 @@ const PageOfSession = (props: Props) => {
      : <div className='w-2/4 justify-end'>
         
      <ChatBot 
-         MessageList={MessageList2}
+         MessageList={LMessageList}
          handleInputChange={handleInputChange}
          handleSubmit={handleSubmit}
          input={input}

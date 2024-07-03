@@ -24,7 +24,7 @@ interface Props {
 }
 
 const InputFormCompo: React.FC<Props> = ({ handleInputChange, handleSubmit, input, messages, setUpload }) => {
-  const systemPrompt=useSelector((state:RootState)=>state.string.value)
+  const systemPrompt=useSelector((state:RootState)=>state.string.systemPrompt)
   const [noOfFiles, setNoOfFiles] = useState<number>(0);
   const dispatch = useDispatch()
   
