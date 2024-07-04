@@ -15,8 +15,7 @@ const Signup = (props: Props) => {
       <LableComponent title='Name' placeholder='Name here' type='text' ></LableComponent>
       <LableComponent title='Email' placeholder='Email here' type='email' ></LableComponent>
       <LableComponent title='Password' placeholder='*******' type='password' ></LableComponent>
-      
-      <Button>Signup</Button>
+      <button>Click me</button>
     </form></div>
   )
 }

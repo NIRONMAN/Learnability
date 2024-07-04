@@ -6,6 +6,7 @@ import YtVidRenderer from '../learningComponents/YtVidRenderer';
 import { useSelector } from 'react-redux';
 import { RootState } from '../GlobalRedux/store';
 import LMessageList from '../learningComponents/LMessageList';
+import PDFFileHandler from '../learningComponents/PDFFileHandler';
 
 type Props = {
     
@@ -19,11 +20,14 @@ const page = (props: Props) => {
         api: "api/v1",
         initialMessages: []
       });
+      console.log("context tyope "+contextType)
   return (
     <div className='h-full grid grid-cols-2 bg-[#232323]'>
+      
         <div className={`h-full ${isContextSet?"col-span-1":"hidden"}`}>
           {
-            (contextType==="ytlink")&&<YtVidRenderer url={url} ></YtVidRenderer>
+            (contextType==="ytlink")&&<YtVidRenderer url={url} ></YtVidRenderer>}
+           { (contextType==="pdf")&&<PDFFileHandler></PDFFileHandler>
             
           }
         </div>
@@ -35,7 +39,7 @@ const page = (props: Props) => {
           input={input}
           messages={messages}
           isLoading={isLoading}
-        />        </div>
+        /> </div>
     </div>
   )
 }

@@ -1,5 +1,4 @@
 "use client"
-import revisionSystemPrompt from '@/lib/revisionSystemPrompt';
 import { PaperClipOutlined } from '@ant-design/icons';
 import { Upload } from 'antd';
 import React, { useState } from 'react';
@@ -7,7 +6,6 @@ import React, { useState } from 'react';
 import { useSelector,useDispatch } from 'react-redux'
 import type { RootState } from '../GlobalRedux/store'
 import {showPdf,hidePdf,setPdf} from '../GlobalRedux/Features/counter/counterSlice'
-import * as pdfjsLib from 'pdfjs-dist';
 
 interface Message {
   content: string,
@@ -45,25 +43,8 @@ const InputFormCompo: React.FC<Props> = ({ handleInputChange, handleSubmit, inpu
       dispatch(setPdf(eve.target?.result as string))
       dispatch(showPdf())
 
-      const loadingTask = pdfjsLib.getDocument({ data: atob(pdfData.split(',')[1]) });
-      const pdf = await loadingTask.promise;
-      const numPages = pdf.numPages;
-      let fullText = '';
-
-      for (let i = 1; i <= numPages; i++) {
-        const page = await pdf.getPage(i);
-        const textContent:any = await page.getTextContent();
-        const pageText = textContent.items.map(item => item.str ).join(' ');
-        fullText += `${pageText} \n\n`;
-      }
-
-      console.log('Extracted Text:', fullText);
       
-    }
-    reader.onerror= (error)=>{
-      console.log('error=',error)
-    }
-  ;}
+  ;}}
 
   return (
     <div>

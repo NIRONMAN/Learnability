@@ -25,7 +25,7 @@ const SignupLoginText = (props: Props) => {
 
     } 
   return (
-    <div className={ `flex flex-col justify-between h-full p-4 text-white ${isLogin?" mr-8":" ml-10"}`}>
+    <div className={ `flex flex-col justify-between h-full p-4 text-white ${isLogin?" mr-0":" mr-0"}`}>
         <h2 className=' text-3xl font-semibold'>{isLogin?loginObj.title:signupObj.title}</h2>
         <p>{isLogin?loginObj.quote:signupObj.quote}</p>
         <p className=''>{isLogin?loginObj.text:signupObj.text}<button

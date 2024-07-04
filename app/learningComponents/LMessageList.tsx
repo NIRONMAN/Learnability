@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import MarkdownContent from '../Components/Markdown';
 
 interface Props {
@@ -6,7 +6,12 @@ interface Props {
 }
 
 function LMessageList({ arr }: Props) {
-    console.log(arr);
+    const endRef=useRef(null)
+    const scrollToBottom = () => {
+        if (endRef.current) {
+            endRef.current.scrollIntoView({ behavior: 'smooth' });
+        }
+    };
 
     return (
         <div id="chatElement" className="text-white flex flex-col">
@@ -20,6 +25,7 @@ function LMessageList({ arr }: Props) {
                     <MarkdownContent rawText={element.content}></MarkdownContent>
                 </div>
             ))}
+            <div ref={endRef}></div>
         </div>
     );
 }
