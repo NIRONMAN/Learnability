@@ -25,11 +25,8 @@ const page = (props: Props) => {
     <div className='h-full grid grid-cols-2 bg-[#232323]'>
       
         <div className={`h-full ${isContextSet?"col-span-1":"hidden"}`}>
-          {
-            (contextType==="ytlink")&&<YtVidRenderer url={url} ></YtVidRenderer>}
-           { (contextType==="pdf")&&<PDFFileHandler></PDFFileHandler>
-            
-          }
+          {(contextType==="ytlink")&&<YtVidRenderer url={url} ></YtVidRenderer>}
+          {(contextType==="pdf")&&<PDFFileHandler></PDFFileHandler>}
         </div>
         <div className={` ${isContextSet?"col-span-1":" col-span-2"}`}>
         <ChatBot 

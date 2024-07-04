@@ -18,12 +18,7 @@ const Page: React.FC<Props> = (props) => {
   const dispatch=useDispatch();
   const contextType=useSelector((state:RootState)=>state.string.contextType)
 
-  const handleRevisionNavigation = () => {
-    const pathname = "/revising";
-    const query = { sessionId: "new-Chat" }; // Ensure sessionId is a string
-    const queryString = new URLSearchParams(query).toString();
-    router.push(`${pathname}?${queryString}`);
-  };
+  
   async function YtClick(){
     dispatch(updateURL(url))
     dispatch(setContextType("ytlink"));
@@ -33,13 +28,15 @@ const Page: React.FC<Props> = (props) => {
 const uploadHandler :any= (e:any) => {
   const file = e.file.originFileObj
   if(file.type!=="application/pdf"){
+    alert("Open a PDF type format")
     console.log("Type not supported")
   }
   const reader = new FileReader();
   reader.readAsDataURL(file)
   reader.onload =async (eve)=>{
     const pdfData = eve.target?.result as string
-    dispatch(setPdf(eve.target?.result as string))
+    
+    dispatch(setPdf(pdfData))
     dispatch(setContextType("pdf"))
    }
 ;}

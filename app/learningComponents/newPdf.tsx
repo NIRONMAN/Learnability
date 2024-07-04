@@ -40,53 +40,53 @@ const PDFFileHandler = (props: Props) => {
   }, [])
 /////////////////////////////////////////////////////////////////////
 //follwing it the code for menu
-  const show = useSelector((state: RootState) => state.counter.value);
-  const pdf = useSelector((state: RootState) => state.counter.file);
+  // const show = useSelector((state: RootState) => state.counter.value);
+  // const pdf = useSelector((state: RootState) => state.counter.file);
 
-  const [isDragging, setIsDragging] = useState(false);
-  const [leftPannelWidth, setLeftPannelWidth] = useState(null);
-  const [leftPannel, setLeftPannel] = useState(null);
-  const [rightPannelWidth, setRightPannelWidth] = useState(null);
-  const [rightPannel, setRightPannel] = useState(null);
-  const [splitterX, setSplitterX] = useState(0);
+  // const [isDragging, setIsDragging] = useState(false);
+  // const [leftPannelWidth, setLeftPannelWidth] = useState(null);
+  // const [leftPannel, setLeftPannel] = useState(null);
+  // const [rightPannelWidth, setRightPannelWidth] = useState(null);
+  // const [rightPannel, setRightPannel] = useState(null);
+  // const [splitterX, setSplitterX] = useState(0);
 
-  const onMouseDown = (e) => {
-    setIsDragging(true);
-    let pEle = e.target.previousElementSibling;
-    let nEle = e.target.nextElementSibling;
+  // const onMouseDown = (e) => {
+  //   setIsDragging(true);
+  //   let pEle = e.target.previousElementSibling;
+  //   let nEle = e.target.nextElementSibling;
 
-    setLeftPannel(pEle);
-    setRightPannel(nEle);
-    setLeftPannelWidth(pEle.offsetWidth);
-    setRightPannelWidth(nEle.offsetWidth);
-    setSplitterX(e.pageX);
-  };
+  //   setLeftPannel(pEle);
+  //   setRightPannel(nEle);
+  //   setLeftPannelWidth(pEle.offsetWidth);
+  //   setRightPannelWidth(nEle.offsetWidth);
+  //   setSplitterX(e.pageX);
+  // };
 
-  const onMouseMove = (e) => {
-    if (!isDragging) return;
-    let mx = e.pageX - splitterX;
-    try {
-      leftPannel.style.width = (leftPannelWidth + mx) + 'px';
-      rightPannel.style.width = (rightPannelWidth - mx) + 'px';
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  // const onMouseMove = (e) => {
+  //   if (!isDragging) return;
+  //   let mx = e.pageX - splitterX;
+  //   try {
+  //     leftPannel.style.width = (leftPannelWidth + mx) + 'px';
+  //     rightPannel.style.width = (rightPannelWidth - mx) + 'px';
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
-  const onMouseUp = (e) => {
-    setIsDragging(false);
-  };
+  // const onMouseUp = (e) => {
+  //   setIsDragging(false);
+  // };
 
-  useEffect(() => {
-    if (isDragging) {
-      document.addEventListener('mousemove', onMouseMove);
-      document.addEventListener('mouseup', onMouseUp);
-    }
-    return () => {
-      document.removeEventListener('mousemove', onMouseMove);
-      document.removeEventListener('mouseup', onMouseUp);
-    };
-  }, [isDragging]);
+  // useEffect(() => {
+  //   if (isDragging) {
+  //     document.addEventListener('mousemove', onMouseMove);
+  //     document.addEventListener('mouseup', onMouseUp);
+  //   }
+  //   return () => {
+  //     document.removeEventListener('mousemove', onMouseMove);
+  //     document.removeEventListener('mouseup', onMouseUp);
+  //   };
+  // }, [isDragging]);
 
   const handleSelection = (event) => {
     const selection = window.getSelection();
