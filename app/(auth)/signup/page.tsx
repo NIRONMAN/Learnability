@@ -12,21 +12,26 @@ const SignupLogin = (props: Props) => {
   const isLogin=useSelector((state:RootState)=>state.auth.value);
 
   return (
-    <div
-      className="bg-cover bg-center w-screen h-screen flex justify-center items-center"
-      style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1457276587196-a9d53d84c58b?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8N3x8bGlicmFyeSUyMGJhY2tncm91bmR8ZW58MHx8MHx8fDA%3D")' }}
-    >
+    <div className="relative w-screen h-screen flex justify-center items-center">
+      <div
+        className="absolute inset-0 bg-cover bg-center blur-sm"
+        style={{
+          backgroundImage: 'url("https://images.unsplash.com/photo-1715576858936-5f3e0249673f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")',
+        }}
+      />
       <div id='gradient card'
-  className="w-[60%]  h-[65%] flex rounded-3xl  shadow-lg "
+  className="w-[60%]  h-[70%] flex rounded-3xl  shadow-2xl "
   style={{
     backgroundImage: isLogin
-      ? 'linear-gradient(to bottom, rgba(64, 230, 210, 0.9), rgba(0, 10, 300, 0.9))'
-      : 'linear-gradient(to bottom, rgba(64, 224, 208, 1.1), rgba(0, 0, 200, 0.8))'
-  }}
+    ? 'linear-gradient(to bottom, rgba(74, 144, 226, 0.9), rgba(80, 227, 194, 0.9))'
+    : 'linear-gradient(to bottom, rgba(74, 144, 226, 0.9), rgba(80, 227, 194, 0.9))',
+    backdropFilter: 'blur(3px)',
+         
+}}
 >
 
         <div
-          className={`bg-white w-[42%] h-[115%] relative bottom-[8%]  p-8 rounded-lg shadow-md transform transition-transform duration-500 ${
+          className={`bg-white  w-[42%] h-[115%] relative bottom-[8%]  p-8 rounded-3xl shadow-xl transform transition-transform duration-500 ${
             isLogin ? 'translate-x-full left-20' : 'translate-x-0 left-10'
           }`}
         >
@@ -55,4 +60,3 @@ const SignupLogin = (props: Props) => {
 };
 
 export default SignupLogin;
-
