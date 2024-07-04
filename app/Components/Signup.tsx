@@ -8,21 +8,22 @@ type Props = {
 
 const Signup = (props: Props) => {
   return (
-    <div><h2 className="text-3xl font-bold mb-4 text-center">Sign Up</h2>
+    <div className="w-full flex flex-col items-center">
+      <h2 className="text-3xl font-bold mb-10 text-center">Sign Up</h2>
     <form onSubmit={(e)=>{
       e.preventDefault()
     }}>
       <LableComponent title='Name' placeholder='Name here' type='text' ></LableComponent>
       <LableComponent title='Email' placeholder='Email here' type='email' ></LableComponent>
       <LableComponent title='Password' placeholder='*******' type='password' ></LableComponent>
-      <button>Click me</button>
+      
+      <div className="mt-11 flex justify-center">
+      <button className=" text-lg w-[90%] bg-teal-100 border-2 border-teal-300 hover:bg-teal-500 text-black font-bold py-2 px-4 rounded-full focus:outline-teal focus:shadow-outline shadow-lg">
+            Sign Up
+          </button>
+          </div>
     </form></div>
   )
 }
 
 export default Signup
-
-
-// className={`bg-white w-1/2 h-[120%] rounded-lg relative bottom-10 left-10 transform transition-transform duration-500 ${
-//     moveCard ? 'translate-x-60' : ''
-//   }`}
