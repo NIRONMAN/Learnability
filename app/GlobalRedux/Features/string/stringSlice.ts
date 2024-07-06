@@ -8,7 +8,8 @@ export const stringSlice=createSlice({
         systemPrompt:"",
         url:"",
         contextType:null,
-        isContextSet:false
+        isContextSet:false,
+        whatToDo:""
     },
     reducers:{
         updateString:(state,action:PayloadAction<string>)=>{
@@ -23,11 +24,14 @@ export const stringSlice=createSlice({
         setIsContextSet:(state)=>{
             state.isContextSet=!state.isContextSet;
         },
+        setWhatToDo:(state,action:PayloadAction<string>)=>{
+            state.whatToDo=action.payload;
+        },
         
 
 
     }
 })
 
-export const {updateString,updateURL,setContextType,setIsContextSet}=stringSlice.actions
+export const {updateString,updateURL,setContextType,setIsContextSet,setWhatToDo}=stringSlice.actions
 export default stringSlice.reducer;

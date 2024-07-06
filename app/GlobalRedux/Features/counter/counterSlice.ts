@@ -18,7 +18,7 @@ export const counterSlice = createSlice({
     reducers:{
         showPdf: (state) => {state.value = ""},
         hidePdf:(state) => {state.value = 'hidden'},
-        setPdf:(state,action)=>{state.file = state.value + action.payload},
+        setPdf:(state,action)=>{state.file = action.payload},
     }
 })
 

@@ -54,6 +54,7 @@ const genAI = new GoogleGenerativeAI(process.env.API_KEY);
 const model = genAI.getGenerativeModel({
   // The Gemini 1.5 models are versatile and work with multimodal prompts
   model:"gemini-1.5-pro",
+  generationConfig: { responseMimeType: "application/json" }, 
 });
 
 export async function POST(req: NextRequest) {
@@ -105,7 +106,11 @@ console.log(`Uploaded file ${uploadResult.file.displayName} as: ${uploadResult.f
           fileUri: uploadResult.file.uri
         }
       },
-      { text: "summarise the audio" },
+      { text: "Give the response in following schema and also exclude markdown just give plain text inside the respective value attribute of the key: "+JSON.stringify({
+        title:"A suitable title which sums up the contents in the audio",
+        context:"summary of the audio in full detail."
+        
+      })},
     ]);
 
     ///
@@ -113,7 +118,8 @@ console.log(`Uploaded file ${uploadResult.file.displayName} as: ${uploadResult.f
     fs.unlinkSync(outputFilePath)
     await fileManager.deleteFile(uploadResult.file.name);
 console.log(`Deleted ${uploadResult.file.displayName}`);
-    return NextResponse.json({ result });
+    // console.log(JSON.parse(result.response.candidates[0].content.parts[0].text))
+    return NextResponse.json({ result:JSON.parse(result.response.candidates[0].content.parts[0].text) });
   } catch (error) {
     console.error('Error:', error);
     return NextResponse.json({ error: 'Failed to extract and download audio' }, { status: 500 });

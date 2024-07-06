@@ -23,28 +23,8 @@ interface Props {
 
 const InputFormCompo: React.FC<Props> = ({ handleInputChange, handleSubmit, input, messages, setUpload }) => {
   const systemPrompt=useSelector((state:RootState)=>state.string.systemPrompt)
-  const [noOfFiles, setNoOfFiles] = useState<number>(0);
-  const dispatch = useDispatch()
   
-  const uploadHandler :any= (e:any) => {
 
-    setNoOfFiles(noOfFiles + 1)
-
-
-    const file = e.file.originFileObj
-
-    if(file.type!=="application/pdf"){
-      return
-    }
-    const reader = new FileReader();
-    reader.readAsDataURL(file)
-    reader.onload =async (eve)=>{
-      const pdfData = eve.target?.result as string
-      dispatch(setPdf(eve.target?.result as string))
-      dispatch(showPdf())
-
-      
-  ;}}
 
   return (
     <div>
@@ -73,11 +53,7 @@ const InputFormCompo: React.FC<Props> = ({ handleInputChange, handleSubmit, inpu
             onChange={(e) => handleInputChange(e)}
             placeholder="Type your message..."
           />
-          <div className="bg-[#3f3f3f] py-1 px-2 rounded-lg hover:cursor-pointer">
-            <Upload onChange={uploadHandler} showUploadList={false}>
-              <PaperClipOutlined style={{ color: 'white', fontSize: '1rem' }} />
-            </Upload>
-          </div>
+          
           <button
             type="submit"
             className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded-lg"

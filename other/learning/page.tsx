@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect } from 'react';
-import ChatBot from '../Components/ChatBot';
+import ChatBot from '../../app/Components/ChatBot';
 import { Menu, Dropdown } from 'antd';
 import { useChat } from "@ai-sdk/react";
 
@@ -9,10 +9,10 @@ import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 import { useSelector, useDispatch } from 'react-redux';
-import type { RootState } from '../GlobalRedux/store';
+import type { RootState } from '../../app/GlobalRedux/store';
 import learningSystemPrompt from '@/lib/learningSystemPrompt';
-import { updateString } from '../GlobalRedux/Features/string/stringSlice';
-import LMessageList from '../learningComponents/LMessageList';
+import { updateString } from '../../app/GlobalRedux/Features/string/stringSlice';
+import LMessageList from '../../app/learningComponents/LMessageList';
 
 type Props = {}
 

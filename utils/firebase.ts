@@ -1,6 +1,6 @@
 
 import { initializeApp, getApps } from "firebase/app";
-import { getAuth, initializeAuth} from "firebase/auth";
+import { getAuth} from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import {getStorage} from "firebase/storage"
 
@@ -24,6 +24,7 @@ if (!getApps().length) {
 // Initialize Firebase Authentication and Firestore
 const db = getFirestore(app);
 const storage=getStorage(app)
+const auth=getAuth(app);
 // const auth = initializeAuth(app);
-export {db,storage}
+export {db,storage,auth}
 // Now you can use auth and db to interact with Firebase Authentication and Firestore services

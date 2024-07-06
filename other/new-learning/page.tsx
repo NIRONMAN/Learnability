@@ -1,18 +1,19 @@
 "use client"
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useChat } from "@ai-sdk/react";
-import ChatBot from '../Components/ChatBot';
-import YtVidRenderer from '../learningComponents/YtVidRenderer';
+import ChatBot from '../../app/Components/ChatBot';
+import YtVidRenderer from '../../app/learningComponents/YtVidRenderer';
 import { useSelector } from 'react-redux';
-import { RootState } from '../GlobalRedux/store';
-import LMessageList from '../learningComponents/LMessageList';
-import PDFFileHandler from '../learningComponents/PDFFileHandler';
+import { RootState } from '../../app/GlobalRedux/store';
+import LMessageList from '../../app/learningComponents/LMessageList';
+import PDFFileHandler from '../../app/learningComponents/PDFFileHandler';
 
 type Props = {
     
 }
 
 const page = (props: Props) => {
+  
   const url=useSelector((state:RootState)=>state.string.url);
   const contextType=useSelector((state:RootState)=>state.string.contextType)
   const isContextSet=useSelector((state:RootState)=>state.string.isContextSet)

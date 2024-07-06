@@ -22,71 +22,63 @@ const PDFFileHandler = (props: Props) => {
   const objectUrl = useSelector((state: RootState) => state.counter.file)
   const [state, setState] = useState("")
   const [loading, setloading] = useState(true)
+  const finalUrl=useSelector((state:RootState)=>state.counter.file)
+  // function removeHiddenData(text: string) {
+  //   const pattern = /^hidden/;
+  //   return text.replace(pattern, '');
+  // }
 
-  function removeHiddenData(text: string) {
-    const pattern = /^hidden/;
-    return text.replace(pattern, '');
-  }
+  // const finalUrl = removeHiddenData(objectUrl)
 
-  const finalUrl = removeHiddenData(objectUrl)
-
-  useEffect(() => {
-    axios.post("/api/pdfExtract", { data: { objectUrl: finalUrl } }).then((res) => {
-      setState(res.data.text)
-      setloading(false)
-      dispatch(updateString(learningSystemPrompt + "This is the Context:" + res.data.text))
-      dispatch(setIsContextSet())
-    })
-  }, [])
 /////////////////////////////////////////////////////////////////////
 //follwing it the code for menu
-  const show = useSelector((state: RootState) => state.counter.value);
-  const pdf = useSelector((state: RootState) => state.counter.file);
+  // const show = useSelector((state: RootState) => state.counter.value);
+  // const pdf = useSelector((state: RootState) => state.counter.file);
 
-  const [isDragging, setIsDragging] = useState(false);
-  const [leftPannelWidth, setLeftPannelWidth] = useState(null);
-  const [leftPannel, setLeftPannel] = useState(null);
-  const [rightPannelWidth, setRightPannelWidth] = useState(null);
-  const [rightPannel, setRightPannel] = useState(null);
-  const [splitterX, setSplitterX] = useState(0);
+  // const [isDragging, setIsDragging] = useState(false);
+  // const [leftPannelWidth, setLeftPannelWidth] = useState(null);
+  // const [leftPannel, setLeftPannel] = useState(null);
+  // const [rightPannelWidth, setRightPannelWidth] = useState(null);
+  // const [rightPannel, setRightPannel] = useState(null);
+  // const [splitterX, setSplitterX] = useState(0);
 
-  const onMouseDown = (e) => {
-    setIsDragging(true);
-    let pEle = e.target.previousElementSibling;
-    let nEle = e.target.nextElementSibling;
+  // const onMouseDown = (e) => {
+  //   setIsDragging(true);
+  //   let pEle = e.target.previousElementSibling;
+  //   let nEle = e.target.nextElementSibling;
 
-    setLeftPannel(pEle);
-    setRightPannel(nEle);
-    setLeftPannelWidth(pEle.offsetWidth);
-    setRightPannelWidth(nEle.offsetWidth);
-    setSplitterX(e.pageX);
-  };
+  //   setLeftPannel(pEle);
+  //   setRightPannel(nEle);
+  //   setLeftPannelWidth(pEle.offsetWidth);
+  //   setRightPannelWidth(nEle.offsetWidth);
+  //   setSplitterX(e.pageX);
+  // };
 
-  const onMouseMove = (e) => {
-    if (!isDragging) return;
-    let mx = e.pageX - splitterX;
-    try {
-      leftPannel.style.width = (leftPannelWidth + mx) + 'px';
-      rightPannel.style.width = (rightPannelWidth - mx) + 'px';
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  // const onMouseMove = (e) => {
+  //   if (!isDragging) return;
+  //   let mx = e.pageX - splitterX;
+  //   try {
+  //     leftPannel.style.width = (leftPannelWidth + mx) + 'px';
+  //     rightPannel.style.width = (rightPannelWidth - mx) + 'px';
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  // };
 
-  const onMouseUp = (e) => {
-    setIsDragging(false);
-  };
+  // const onMouseUp = (e) => {
+  //   setIsDragging(false);
+  // };
 
-  useEffect(() => {
-    if (isDragging) {
-      document.addEventListener('mousemove', onMouseMove);
-      document.addEventListener('mouseup', onMouseUp);
-    }
-    return () => {
-      document.removeEventListener('mousemove', onMouseMove);
-      document.removeEventListener('mouseup', onMouseUp);
-    };
-  }, [isDragging]);
+  // useEffect(() => {
+  //   if (isDragging) {
+  //     document.addEventListener('mousemove', onMouseMove);
+  //     document.addEventListener('mouseup', onMouseUp);
+  //   }
+  //   return () => {
+  //     document.removeEventListener('mousemove', onMouseMove);
+  //     document.removeEventListener('mouseup', onMouseUp);
+  //   };
+  // }, [isDragging]);
 
   const handleSelection = (event) => {
     const selection = window.getSelection();
@@ -111,7 +103,7 @@ const PDFFileHandler = (props: Props) => {
     };
   }, []);
 
-  const menu = ()=>(
+  const menu:any = (
     <Menu>
       <Menu.Item key="1" onClick={() => alert(`Action 1 on: ${selectedText}`)}>
         Explain term
@@ -139,7 +131,7 @@ const PDFFileHandler = (props: Props) => {
               />
             </div>
             {menuVisible && (
-              <Dropdown overlay={menu} visible={menuVisible} trigger={['click']}>
+              <Dropdown  menu={{items:menu}} visible={menuVisible} trigger={['click']}>
                 <span
                   style={{
                     position: 'absolute',

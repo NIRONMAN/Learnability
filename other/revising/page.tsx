@@ -1,16 +1,16 @@
 "use client";
 import React, { useEffect, useState } from 'react';
-import ChatBot from '../Components/ChatBot';
-import { SuggestionsProvider } from '../Components/SuggestionsContext';
-import Suggestions from '../Components/Suggestions';
-import MessageList from '../Components/MessageList';
+import ChatBot from '../../app/Components/ChatBot';
+import { SuggestionsProvider } from '../../app/Components/SuggestionsContext';
+import Suggestions from '../../app/Components/Suggestions';
+import MessageList from '../../app/Components/MessageList';
 import { Button } from 'antd';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useChat } from "@ai-sdk/react";
-import HistoryCompo from '../Components/HistoryCompo';
+import HistoryCompo from '../HistoryCompo';
 import { createSession, getHistory, getSession, updateHistory, updateSession } from '@/utils/functions';
 import { useDispatch } from 'react-redux';
-import { updateString } from '../GlobalRedux/Features/string/stringSlice';
+import { updateString } from '../../app/GlobalRedux/Features/string/stringSlice';
 import revisionSystemPrompt from '@/lib/revisionSystemPrompt';
 
 interface historyType {
