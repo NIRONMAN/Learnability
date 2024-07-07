@@ -7,6 +7,7 @@
  * https://ai.google.dev/gemini-api/docs/get-started/node
  */
 
+import diagramSystemPrompt from "@/lib/diagramSystemPrompt";
 import { NextRequest, NextResponse } from "next/server";
 
 const {
@@ -25,10 +26,10 @@ const {
 
   export async function POST(req:NextRequest,res:NextResponse) {
     const body=await req.json();
-    const systemPrompt=body.data.systemPrompt;
-    const prompt=body.data.prompt;
+    const systemPrompt=diagramSystemPrompt;
+    const context=body.context;
     const model = genAI.getGenerativeModel({
-        model: "gemini-1.5-flash",
+        model: "gemini-1.5-pro",
         systemInstruction:systemPrompt,
       });
       
@@ -44,16 +45,14 @@ const {
             generationConfig,
          // safetySettings: Adjust safety settings
          // See https://ai.google.dev/gemini-api/docs/safety-settings
-            history: [
-            ],
+            history: [],
           });
         
-          const result = await chatSession.sendMessage(prompt);
-          console.log(result.response.text());
+          const result = await chatSession.sendMessage("This is the context: "+context);
           const output=result.response.text();
           return NextResponse.json({result:output})
     } catch (error) {
-        return NextResponse.json({result:error})
+        return NextResponse.json({result:"Something Wrong "+error})
 
     }
   }

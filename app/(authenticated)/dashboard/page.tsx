@@ -23,18 +23,37 @@ import { useDispatch, useSelector } from "react-redux";
 const Page = () => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { user, isLoadingCookie } = useSelector((state: RootState) => state.auth);
+  const { user, isLoadingCookie } = useSelector(
+    (state: RootState) => state.auth
+  );
   const userId = user?.userId;
   const pdfObject = useSelector((state: RootState) => state.counter.file);
-  const learnOrRevise = useSelector((state: RootState) => state.string.whatToDo);
-  const contextType = useSelector((state: RootState) => state.string.contextType);
-  const isContextSet = useSelector((state: RootState) => state.string.isContextSet);
+  const learnOrRevise = useSelector(
+    (state: RootState) => state.string.whatToDo
+  );
+  const contextType = useSelector(
+    (state: RootState) => state.string.contextType
+  );
+  const isContextSet = useSelector(
+    (state: RootState) => state.string.isContextSet
+  );
   const [localurl, setLocalUrl] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [localContext, setLocalContext] = useState({
     context: "",
     title: "",
   });
+  const [opacity, setOpacity] = useState("");
+  const [step, setStep] = useState(1);
+
+  useEffect(() => {
+    setOpacity("opacity-0")
+    const timer = setTimeout(() => {
+      setOpacity("opacity-100");
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [step]);
 
   useEffect(() => {
     if (!isLoadingCookie && !user) {
@@ -77,7 +96,16 @@ const Page = () => {
     } finally {
       setIsLoading(false);
     }
-  }, [userId, isContextSet, localurl, learnOrRevise, contextType, localContext, dispatch, router]);
+  }, [
+    userId,
+    isContextSet,
+    localurl,
+    learnOrRevise,
+    contextType,
+    localContext,
+    dispatch,
+    router,
+  ]);
 
   useEffect(() => {
     handleNavigation();
@@ -89,13 +117,18 @@ const Page = () => {
       if (contextType === "ytlink") {
         if (localurl) {
           const res = await axios.post("/api/extract", { url: localurl });
-          setLocalContext({ context: res.data.result.context, title: res.data.result.title });
+          setLocalContext({
+            context: res.data.result.context,
+            title: res.data.result.title,
+          });
         } else {
           throw new Error("No URL provided");
         }
       } else if (contextType === "pdf") {
-        const res = await axios.post("/api/pdfExtract", { data: { objectUrl: pdfObject } });
-        setLocalContext({ context: res.data.context, title: res.data.text});
+        const res = await axios.post("/api/pdfExtract", {
+          data: { objectUrl: pdfObject },
+        });
+        setLocalContext({ context: res.data.context, title: res.data.text });
       }
       dispatch(setIsContextSet());
     } catch (error) {
@@ -115,61 +148,116 @@ const Page = () => {
         dispatch(setPdf(pdfData));
       };
       reader.readAsDataURL(file.originFileObj);
-      if(contextType==="learn"){
+      if (contextType === "learn") {
         const url = await uploadPdfToFirebase(pdfObject, file.name);
-      setLocalUrl(url);
+        setLocalUrl(url);
       }
-      
+      setStep(4)
     } catch (error) {
       console.error("Error uploading file:", error);
     }
+
   };
 
   return (
-    <div className="bg-[#363062] flex flex-col justify-center items-center text-[#F5E8C7] h-full">
+    <div className="bg-[#363062] flex flex-col justify-center items-center text-[#F5E8C7] h-full ">
       {isLoading ? (
         <Spin size="large" />
       ) : (
-        <>
-          <h1 className="text-4xl font-bold p-4">What do you want to do today?</h1>
-          <div className="w-1/3 flex justify-around mb-4">
-            <Button onClick={() => dispatch(setWhatToDo("learn"))} size="large">
-              Learn
-            </Button>
-            <Button onClick={() => dispatch(setWhatToDo("revise"))} size="large">
-              Revise
-            </Button>
-          </div>
-          <h2 className="mb-2">Add the resource here</h2>
-          <div className="mb-4">
-            <Button onClick={() => dispatch(setContextType("pdf"))} className="mr-2">
+        <div className={`opacity-0 transition-opacity duration-1000 ease-in-out ${opacity}`}>
+          {step === 1 && (
+            <div
+              className={`justify-center items-center`}
+            >
+              <h1 className={` text-4xl font-bold p-4`}>
+                What do you want to do today?
+              </h1>
+              <div className="w-full flex justify-around mb-4">
+                <Button
+                  onClick={() => {dispatch(setWhatToDo("learn"))
+                    setStep(2)
+                  }}
+                  size="large"
+                >
+                  Learn
+                </Button>
+                <Button
+                  onClick={() => {dispatch(setWhatToDo("revise"))
+                    setStep(2)
+                  }}
+                  size="large"
+                >
+                  Revise
+                </Button>
+                <Button size="large" 
+                onClick={()=>{
+                  dispatch(setWhatToDo("diagram"))
+                  setStep(2)
+                }}
+                >
+                  Create a Mindmap
+                </Button>
+              </div>
+            </div>
+          )}
+          
+         {step===2&&<div className={` justify-center items-center opacity-0 transition-opacity duration-1000 ease-in-out ${opacity}`} >
+          <h1 className="mb-2 text-2xl font-bold">Add the resource here</h1>
+          <div className="mb-4 flex justify-around">
+            <Button
+              onClick={() => {dispatch(setContextType("pdf"))
+                setStep(3)
+              }}
+              className="mr-2"
+            >
               PDF
             </Button>
-            <Button onClick={() => dispatch(setContextType("ytlink"))}>
+            <Button onClick={() => {dispatch(setContextType("ytlink"))
+              setStep(3)
+            }}>
               YT Link
             </Button>
           </div>
-          {contextType === "pdf" && (
-            <Upload accept="application/pdf" onChange={uploadHandler} showUploadList={false}>
-              <Button icon={<PaperClipOutlined style={{ color: "black", fontSize: "1rem" }} />}>
+          </div>}
+          {(contextType === "pdf"&& step===3) && (
+            <Upload
+              className={`opacity-0 transition-opacity duration-1000 ease-in-out ${opacity}`}
+              accept="application/pdf"
+              onChange={uploadHandler}
+              showUploadList={false}
+            >
+              <Button
+                icon={
+                  <PaperClipOutlined
+                    style={{ color: "black", fontSize: "1rem" }}
+                  />
+                }
+              >
                 Open a PDF
               </Button>
             </Upload>
           )}
-          {contextType === "ytlink" && (
-            <div className="p-4 w-full flex justify-center items-center gap-2">
+          {(contextType === "ytlink" && step===3) && (
+            <div className={"p-4 w-full flex justify-center items-center gap-2"+`opacity-0 transition-opacity duration-1000 ease-in-out ${opacity}`}>
               <Input
                 className="w-2/3"
                 onChange={(e) => setLocalUrl(e.target.value)}
                 placeholder="Enter YouTube URL"
               />
-              <Button onClick={() => dispatch(updateURL(localurl))}>Submit</Button>
+              <Button onClick={() => {dispatch(updateURL(localurl))
+                setStep(4)
+              }}>
+                Submit
+              </Button>
             </div>
           )}
-          <Button onClick={handleFinalClick} className="mt-4">
-            Ready to begin
+          {step===4&&<div className={"w-full flex justify-center items-center flex-col "+`opacity-0 transition-opacity duration-1000 ease-in-out ${opacity}`}>
+            <h1 className=" text-2xl font-bold font-serif">Let's Start</h1>
+            <Button onClick={handleFinalClick} className="mt-4">
+            Here
           </Button>
-        </>
+          </div>}
+        </div>
       )}
     </div>
   );
