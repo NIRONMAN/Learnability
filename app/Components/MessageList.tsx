@@ -39,7 +39,7 @@ function MessageList({ arr }: Props) {
     };
 
     return (
-        <div id="chatElement" className="text-white flex flex-col">
+        <div id="chatElement" className="text-white flex flex-col overflow-auto">
             {arr.map((element: any) => {
                 const parsedContent = element.role === 'assistant' ? parseContent(element.content) : null;
 

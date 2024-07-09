@@ -1,12 +1,14 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { Menu, Button, Avatar, Dropdown, Select } from 'antd';
+import { Menu, Button, Avatar, Dropdown, Select, message } from 'antd';
 import { MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/app/GlobalRedux/store';
 import { setSessions } from '@/app/GlobalRedux/Features/sessions/sessionsSlice';
-import { getUserSessions } from '@/utils/functions';
+import { createSession, getSession, getUserSessions } from '@/utils/functions';
+import MarkdownContent from '../Components/Markdown';
+import { setOnLearn } from '../GlobalRedux/Features/string/stringSlice';
 
 const { Option } = Select;
 
@@ -18,7 +20,9 @@ const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => {
   const dispatch = useDispatch();
   const router = useRouter();
   const [mounted, setMounted] = useState(false);
-
+  const onLearn=useSelector((state:RootState)=>state.string.onLearn)
+  const userandSession=useSelector((state:RootState)=>state.string.learnSessionId)
+  
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -59,17 +63,47 @@ const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => {
     return session.sessionType === filter;
   });
 
-  const truncateTitle = (title: string, limit: number) => {
-    return title.length > limit ? title.substring(0, limit) + '...' : title;
-  };
+  // const truncateTitle = (title: string, limit: number) => {
+  //   return title.length > limit ? title.substring(0, limit) + '...' : title;
+  // };
 
   if (!mounted) {
     return null; // or a loading spinner
   }
+  async function handleLearnClick(){
+
+   const res= await getSession(userandSession.sessionId,userandSession.userId)
+   console.log("the get ",res)
+   try {
+    const newsessionId = await createSession(
+      {
+        fileUrl: res.fileUrl,
+        sessionType: "revise",
+        contextType: res.contextType,
+        context: res.context,
+        sessionTitle: res.sessionTitle,
+        messages: [],
+      },
+      userandSession.userId
+    );
+    console.log("sessionid ",newsessionId)
+
+    const pathname = `/${"revise"}`;
+    const query = { sessionId:newsessionId };
+    const queryString = new URLSearchParams(query).toString();
+    router.push(`${pathname}?${queryString}`);
+  } catch (error) {
+    console.error("Failed to create session:", error);
+    message.error("Failed to create session. Please try again.");
+  }
+  finally{
+    dispatch(setOnLearn())
+  }
+  }
 
   return (
     <div className="flex h-screen">
-      <aside className={`bg-gray-800 text-white transition-all duration-300 ${collapsed ? 'w-0' : 'w-64'}`}>
+      <aside className={`bg-gray-800 text-white transition-all duration-300 ${collapsed ? 'w-0' : 'w-1/3'}`}>
         <div className="p-4">
           {!collapsed && (
             <Select
@@ -92,7 +126,7 @@ const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => {
                 className="px-4 py-2 hover:bg-gray-700 cursor-pointer border border-gray-700 rounded-md m-2"
                 onClick={() => handleSessionClick(session.sessionId,session.sessionType)}
               >
-                <span className="text-sm">{truncateTitle(session.title, 25)}</span>
+                <div className=' h-12 overflow-hidden'><MarkdownContent rawText={session.title}></MarkdownContent></div>
                 <br />
                 <span className="text-xs text-gray-400">{session.sessionType}</span>
               </li>
@@ -101,7 +135,7 @@ const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => {
         </nav>
       </aside>
       <div className="flex flex-col flex-grow">
-        <header className="bg-white shadow">
+        <header className="bg-[#363062] text-[#F5E8C7] shadow">
           <div className="flex justify-between items-center px-4 py-2">
             <div className="flex items-center">
               <Button
@@ -112,9 +146,9 @@ const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => {
               />
               <h1 className="text-xl font-bold ml-4">Learnability AI</h1>
             </div>
-            <div className="flex items-center">
-              {/* Place for logo */}
-              <div className="w-8 h-8 bg-gray-800 mr-4"></div>
+            <div className="flex items-center gap-2">
+            {(onLearn)&&<Button onClick={handleLearnClick}>Revise from this Chat</Button>}
+              
               <Dropdown menu={{ items: userMenu }} trigger={['click']}>
                 <a className="flex items-center" onClick={e => e.preventDefault()}>
                   <Avatar icon={<UserOutlined />} className="mr-2" />

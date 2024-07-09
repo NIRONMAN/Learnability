@@ -9,7 +9,7 @@ const PdfViewer = ({ objectUrl }: Props) => {
     <div className='h-full'>
       <div className='h-full'>
         <iframe
-          src={`${objectUrl}#toolbar=0`}
+          src={`${objectUrl}#toolbar=1`}
           style={{
             border: '1px solid rgba(0, 0, 0, 0.3)',
             width: '100%',

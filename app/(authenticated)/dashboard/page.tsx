@@ -5,7 +5,7 @@ import { addSession } from "@/app/GlobalRedux/Features/sessions/sessionsSlice";
 import {
   setContextType,
   setIsContextSet,
-  setWhatToDo,
+  setLearningMode,
   updateString,
   updateURL,
 } from "@/app/GlobalRedux/Features/string/stringSlice";
@@ -28,8 +28,8 @@ const Page = () => {
   );
   const userId = user?.userId;
   const pdfObject = useSelector((state: RootState) => state.counter.file);
-  const learnOrRevise = useSelector(
-    (state: RootState) => state.string.whatToDo
+  const learningMode = useSelector(
+    (state: RootState) => state.string.learningMode
   );
   const contextType = useSelector(
     (state: RootState) => state.string.contextType
@@ -75,7 +75,7 @@ const Page = () => {
       const sessionId = await createSession(
         {
           fileUrl: localurl,
-          sessionType: learnOrRevise,
+          sessionType: learningMode,
           contextType: contextType,
           context: localContext.context,
           sessionTitle: localContext.title,
@@ -86,7 +86,7 @@ const Page = () => {
 
       dispatch(addSession({ id: sessionId, title: localContext.title }));
 
-      const pathname = `/${learnOrRevise}`;
+      const pathname = `/${learningMode}`;
       const query = { sessionId };
       const queryString = new URLSearchParams(query).toString();
       router.push(`${pathname}?${queryString}`);
@@ -100,7 +100,7 @@ const Page = () => {
     userId,
     isContextSet,
     localurl,
-    learnOrRevise,
+    learningMode,
     contextType,
     localContext,
     dispatch,
@@ -148,7 +148,7 @@ const Page = () => {
         dispatch(setPdf(pdfData));
       };
       reader.readAsDataURL(file.originFileObj);
-      if (contextType === "learn") {
+      if (learningMode === "learn") {
         const url = await uploadPdfToFirebase(pdfObject, file.name);
         setLocalUrl(url);
       }
@@ -174,7 +174,7 @@ const Page = () => {
               </h1>
               <div className="w-full flex justify-around mb-4">
                 <Button
-                  onClick={() => {dispatch(setWhatToDo("learn"))
+                  onClick={() => {dispatch(setLearningMode("learn"))
                     setStep(2)
                   }}
                   size="large"
@@ -182,7 +182,7 @@ const Page = () => {
                   Learn
                 </Button>
                 <Button
-                  onClick={() => {dispatch(setWhatToDo("revise"))
+                  onClick={() => {dispatch(setLearningMode("revise"))
                     setStep(2)
                   }}
                   size="large"
@@ -191,7 +191,7 @@ const Page = () => {
                 </Button>
                 <Button size="large" 
                 onClick={()=>{
-                  dispatch(setWhatToDo("diagram"))
+                  dispatch(setLearningMode("diagram"))
                   setStep(2)
                 }}
                 >
@@ -219,25 +219,28 @@ const Page = () => {
             </Button>
           </div>
           </div>}
-          {(contextType === "pdf"&& step===3) && (
+          {
+            step===3&&<>
+            {(contextType === "pdf") && (
+              <div className={`opacity-0 transition-opacity duration-1000 ease-in-out ${opacity}`}>
             <Upload
-              className={`opacity-0 transition-opacity duration-1000 ease-in-out ${opacity}`}
               accept="application/pdf"
               onChange={uploadHandler}
               showUploadList={false}
-            >
+              >
               <Button
                 icon={
                   <PaperClipOutlined
-                    style={{ color: "black", fontSize: "1rem" }}
+                  style={{ color: "black", fontSize: "1rem" }}
                   />
                 }
-              >
+                >
                 Open a PDF
               </Button>
             </Upload>
+                </div>
           )}
-          {(contextType === "ytlink" && step===3) && (
+          {(contextType === "ytlink") && (
             <div className={"p-4 w-full flex justify-center items-center gap-2"+`opacity-0 transition-opacity duration-1000 ease-in-out ${opacity}`}>
               <Input
                 className="w-2/3"
@@ -251,6 +254,8 @@ const Page = () => {
               </Button>
             </div>
           )}
+            </>
+          }
           {step===4&&<div className={"w-full flex justify-center items-center flex-col "+`opacity-0 transition-opacity duration-1000 ease-in-out ${opacity}`}>
             <h1 className=" text-2xl font-bold font-serif">Let's Start</h1>
             <Button onClick={handleFinalClick} className="mt-4">

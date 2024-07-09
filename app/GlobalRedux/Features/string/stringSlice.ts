@@ -9,7 +9,12 @@ export const stringSlice=createSlice({
         url:"",
         contextType:null,
         isContextSet:false,
-        whatToDo:""
+        learningMode:"",
+        onLearn:false,
+        learnSessionId:{
+            sessionId:"",
+            userId:""
+        }
     },
     reducers:{
         updateString:(state,action:PayloadAction<string>)=>{
@@ -24,14 +29,19 @@ export const stringSlice=createSlice({
         setIsContextSet:(state)=>{
             state.isContextSet=!state.isContextSet;
         },
-        setWhatToDo:(state,action:PayloadAction<string>)=>{
-            state.whatToDo=action.payload;
+        setLearningMode:(state,action:PayloadAction<string>)=>{
+            state.learningMode=action.payload;
         },
-        
+        setOnLearn:(state)=>{
+            state.onLearn=!state.onLearn
+        },
+        setLearnSessionId:(state,action:PayloadAction<{sessionId:string,userId:string}>)=>{
+            state.learnSessionId=action.payload;
+        }
 
 
     }
 })
 
-export const {updateString,updateURL,setContextType,setIsContextSet,setWhatToDo}=stringSlice.actions
+export const {updateString,updateURL,setContextType,setIsContextSet,setLearningMode,setLearnSessionId,setOnLearn}=stringSlice.actions
 export default stringSlice.reducer;

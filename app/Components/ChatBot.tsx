@@ -8,8 +8,8 @@ export default function ChatBot({MessageList,messages,input,handleInputChange,ha
   const isContextSet=useSelector((state:RootState)=>state.string.isContextSet)
 
   return (
-    <div className="h-full flex flex-col bg-[#232323] items-center">
-        <div className="flex-grow overflow-auto w-full max-w-3xl p-8">
+    <div className="flex flex-col bg-[#232323] items-center">
+        <div className="flex-grow w-full max-w-3xl p-8">
          {/* {isContextSet? <MessageList arr={messages} />:<AllInputCompo></AllInputCompo>} */}
          <MessageList arr={messages} />
         </div>

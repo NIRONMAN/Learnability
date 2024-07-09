@@ -10,7 +10,7 @@ import ChatBot from '@/app/Components/ChatBot';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Spin } from 'antd';
 import { getSession, sessionProps, updateSession } from '@/utils/functions';
-import { updateString } from '@/app/GlobalRedux/Features/string/stringSlice';
+import {  setLearningMode, setLearnSessionId, setOnLearn, updateString } from '@/app/GlobalRedux/Features/string/stringSlice';
 import learningSystemPrompt from '@/lib/learningSystemPrompt';
 
 
@@ -49,7 +49,8 @@ const page = (props: Props) => {
       getSession(sessionId, userId).then((response:sessionProps) => {
         setSessionData(response)
         setMessages(response.messages);
-        
+        dispatch(setOnLearn())
+        dispatch(setLearnSessionId({sessionId,userId}))
       });
     }
   }, [sessionId, userId,setMessages]);
@@ -107,7 +108,7 @@ const page = (props: Props) => {
       }
 
   return (
-    <div className=' grid grid-cols-10 bg-[#232323]'>
+    <div className=' grid grid-cols-10 bg-[#232323] h-full'>
       
         <div className={`col-span-5`}>
           {(sessionData.contextType==="ytlink")&&<YtVidRenderer url={sessionData.fileUrl} ></YtVidRenderer>}
