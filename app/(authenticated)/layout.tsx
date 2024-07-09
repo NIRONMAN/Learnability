@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { Menu, Button, Avatar, Dropdown, Select, message } from 'antd';
-import { MenuFoldOutlined, MenuUnfoldOutlined, UserOutlined } from '@ant-design/icons';
+import { Menu, Button, Avatar, Dropdown, Select, message, MenuItemProps, MenuProps } from 'antd';
+import { LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined, ProfileOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/app/GlobalRedux/store';
@@ -9,6 +9,7 @@ import { setSessions } from '@/app/GlobalRedux/Features/sessions/sessionsSlice';
 import { createSession, getSession, getUserSessions } from '@/utils/functions';
 import MarkdownContent from '../Components/Markdown';
 import { setOnLearn } from '../GlobalRedux/Features/string/stringSlice';
+import { clearUser } from '../GlobalRedux/Features/auth/authSlice';
 
 const { Option } = Select;
 
@@ -50,22 +51,40 @@ const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => {
     router.push(`/${sessionType}?sessionId=${sessionId}`);
   };
 
-  const userMenu: any = (
-    <Menu>
-      <Menu.Item key="1" onClick={()=>alert("Profile Clicked")}>Profile</Menu.Item>
-      <Menu.Item key="2">Settings</Menu.Item>
-      <Menu.Item key="3">Logout</Menu.Item>
-    </Menu>
-  );
+ 
+  type MenuItem = Required<MenuProps>['items'][number];
 
+  const item:MenuItem[]=[
+    {
+      key:"1",
+      label:"Profile",
+      icon:<ProfileOutlined></ProfileOutlined>,
+      onClick:()=>message.success("Clicked Profile")
+    },
+    {
+      key:"2",
+      label:"Settings",
+      icon:<SettingOutlined></SettingOutlined>,
+      onClick:()=>message.success("Clicked Settings")
+
+    },
+    {
+      key:"3",
+      label:"Logout",
+      icon:<LogoutOutlined></LogoutOutlined>,
+      onClick:()=>{
+        dispatch(clearUser())
+        message.warning("Logged out!")
+      }
+    }
+  ]
+ 
   const filteredSessions = sessions.filter(session => {
     if (filter === 'all') return true;
     return session.sessionType === filter;
   });
 
-  // const truncateTitle = (title: string, limit: number) => {
-  //   return title.length > limit ? title.substring(0, limit) + '...' : title;
-  // };
+  
 
   if (!mounted) {
     return null; // or a loading spinner
@@ -149,8 +168,8 @@ const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => {
             <div className="flex items-center gap-2">
             {(onLearn)&&<Button onClick={handleLearnClick}>Revise from this Chat</Button>}
               
-              <Dropdown menu={{ items: userMenu }} trigger={['click']}>
-                <a className="flex items-center" onClick={e => e.preventDefault()}>
+              <Dropdown menu={{ items: item }} trigger={['click']}>
+                <a className="flex items-center" onClick={e => {e.preventDefault()}}>
                   <Avatar icon={<UserOutlined />} className="mr-2" />
                   {mounted && user?.displayName && <span>{user.displayName}</span>}
                 </a>

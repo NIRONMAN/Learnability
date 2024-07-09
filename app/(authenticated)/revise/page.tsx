@@ -27,7 +27,7 @@ const RevisingPage = () => {
   
   useEffect(() => {
     if (!isLoadingCookie && !user) {
-      router.replace("/signup");
+      router.replace("/signup-login");
     }
   }, [isLoadingCookie, user, router]);
 

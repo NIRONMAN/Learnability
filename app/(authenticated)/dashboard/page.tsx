@@ -57,15 +57,11 @@ const Page = () => {
 
   useEffect(() => {
     if (!isLoadingCookie && !user) {
-      router.replace("/signup");
+      router.replace("/signup-login");
     }
   }, [isLoadingCookie, user, router]);
 
-  useEffect(() => {
-    if (!userId) {
-      router.replace("/signup");
-    }
-  }, [userId, router]);
+  
 
   const handleNavigation = useCallback(async () => {
     if (!userId || !isContextSet) return;
