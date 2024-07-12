@@ -27,10 +27,10 @@ const SignupLoginText = (props: Props) => {
 
     } 
   return (
-    <div className={ `flex flex-col justify-between h-full p-4 text-black ${isLogin?" mr-8":" ml-15"}`}>
+    <div className={ `text-white flex flex-col justify-between h-full p-4 text-black ${isLogin?" mr-8":" ml-15"}`}>
         <h2 className=' text-4xl font-semibold'>{isLogin?loginObj.title:signupObj.title} <br />
         {isLogin ? loginObj.subtitle : signupObj.subtitle}</h2>
-        <p className="text-2xl italic ">&quot;{isLogin ? loginObj.quote : signupObj.quote}&quot;</p>
+        <p className="text-gray-200 text-2xl italic ">&quot;{isLogin ? loginObj.quote : signupObj.quote}&quot;</p>
         <p className="text-xl font-semibold flex">
                 {isLogin ? loginObj.text : signupObj.text}{' '}
                 <button

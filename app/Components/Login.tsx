@@ -17,7 +17,7 @@ const Login = (props: Props) => {
   })
   return (
     <div className="h-full w-full flex flex-col items-center justify-center">
-      <div className=' bg-teal-100 rounded-2xl p-4'>
+      <div className=' bg-gray-400 rounded-2xl p-4'>
       <h2 className="text-3xl font-bold py-6 text-center">Login</h2>
              
              <LableComponent handleChange={(e)=>{
@@ -39,7 +39,7 @@ const Login = (props: Props) => {
       }));
         router.push("/dashboard")   
     }}
-     className="w-full text-lg bg-teal-200 border-2 border-teal-300 hover:bg-teal-500 text-black font-bold rounded-3xl focus:outline-teal focus:shadow-outline shadow-lg">
+     className="w-full text-lg bg-gray-200 border-2 border-gray-200 hover:bg-teal-500 text-black font-bold rounded-3xl focus:outline-teal focus:shadow-outline shadow-lg">
            Login
          </button>
          </div>
