@@ -19,7 +19,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import removeMarkdown from "markdown-to-text"
 const Page = () => {
   const router = useRouter();
   const dispatch = useDispatch();
@@ -74,7 +74,7 @@ const Page = () => {
           sessionType: learningMode,
           contextType: contextType,
           context: localContext.context,
-          sessionTitle: localContext.title,
+          sessionTitle: removeMarkdown(localContext.title),
           messages: [],
         },
         userId

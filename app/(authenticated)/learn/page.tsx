@@ -108,13 +108,13 @@ const page = (props: Props) => {
       }
 
   return (
-    <div className=' grid grid-cols-10 bg-[#232323] h-full'>
+    <div className=' grid grid-cols-10 bg-[#232323] ' style={{height:'calc(100vh - 56px)'}}>
       
         <div className={`col-span-5`}>
           {(sessionData.contextType==="ytlink")&&<YtVidRenderer url={sessionData.fileUrl} ></YtVidRenderer>}
           {(sessionData.contextType==="pdf")&&<PdfViewer objectUrl={sessionData.fileUrl}></PdfViewer>}
         </div>
-        <div className={`col-span-5`}>
+        <div className={`col-span-5 h-full`}>
         <ChatBot 
           MessageList={LMessageList}
           handleInputChange={handleInputChange}
