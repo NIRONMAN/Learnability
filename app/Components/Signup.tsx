@@ -22,7 +22,7 @@ const Signup = () => {
   const router=useRouter()
   return (
     <div className="h-full w-full flex flex-col items-center justify-center ">
-            <div className=' bg-teal-100 rounded-2xl p-3'>
+            <div className=' bg-gray-400 rounded-2xl p-3'>
 
       <h2 className="text-3xl font-bold text-center py-2 pb-5">Sign Up</h2>
    
@@ -38,7 +38,7 @@ const Signup = () => {
       }} title='Password' placeholder='*******' type='password' ></LableComponent>
       
       <div className=" flex justify-center py-3 p-2">
-      <button className=" w-full text-lg bg-teal-200 border-2 border-teal-300 hover:bg-teal-500 text-black font-bold  rounded-3xl focus:outline-teal focus:shadow-outline shadow-lg"
+      <button className=" w-full text-lg bg-gray-200 hover:bg-gray-500 text-black font-bold  rounded-3xl focus:outline-teal focus:shadow-outline shadow-lg"
       onClick={async ()=>{
         const res=await createUserWithEmailAndPassword(auth,data.email,data.password)
         const user=res.user;

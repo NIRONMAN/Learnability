@@ -19,6 +19,12 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import particles from '../../Components/config/particles.json'
+
+import ParticlsBackground from "@/app/Components/ParticlsBackground";
+// import Particles from '@tsparticles/react'
+// import particlesConfig from "@/app/Components/config/particlesConfig";
+
 import removeMarkdown from "markdown-to-text"
 const Page = () => {
   const router = useRouter();
@@ -157,6 +163,8 @@ const Page = () => {
 
   return (
     <div className="bg-[#363062] flex flex-col justify-center items-center text-[#F5E8C7] h-full ">
+      <ParticlsBackground/>
+
       {isLoading ? (
         <Spin size="large" />
       ) : (
@@ -165,7 +173,7 @@ const Page = () => {
             <div
               className={`justify-center items-center`}
             >
-              <h1 className={` text-4xl font-bold p-4`}>
+              <h1 className={` text-4xl z-10 font-bold p-4`}>
                 What do you want to do today?
               </h1>
               <div className="w-full flex justify-around mb-4">
