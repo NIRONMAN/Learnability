@@ -19,7 +19,6 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import particles from '../../Components/config/particles.json'
 
 import ParticlsBackground from "@/app/Components/ParticlsBackground";
 // import Particles from '@tsparticles/react'
@@ -162,7 +161,7 @@ const Page = () => {
   };
 
   return (
-    <div className="bg-[#363062] flex flex-col justify-center items-center text-[#F5E8C7] h-full ">
+    <div className=" flex flex-col justify-center items-center text-[#F5E8C7] h-full ">
       <ParticlsBackground/>
 
       {isLoading ? (
