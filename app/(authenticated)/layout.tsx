@@ -10,6 +10,7 @@ import { createSession, getSession, getUserSessions } from '@/utils/functions';
 import MarkdownContent from '../Components/Markdown';
 import { setOnLearn } from '../GlobalRedux/Features/string/stringSlice';
 import { clearUser } from '../GlobalRedux/Features/auth/authSlice';
+import Logo from '../Components/Logo';
 
 const { Option } = Select;
 
@@ -154,16 +155,18 @@ const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => {
         </nav>
       </aside>
       <div className="flex flex-col flex-grow">
-        <header className="bg-[#363062] text-[#F5E8C7] shadow">
+        <header className="text-[#F5E8C7] shadow">
           <div className="flex justify-between items-center px-4 py-2">
             <div className="flex items-center">
               <Button
                 type="text"
-                icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+                icon={collapsed ?  <MenuUnfoldOutlined style={{ color: 'white',fontSize:'1.5rem' }} /> : 
+                <MenuFoldOutlined style={{ color: 'white' }} />}
                 onClick={toggleSidebar}
                 className="text-lg w-10 h-10"
               />
-              <h1 className="text-xl font-bold ml-4">Learnability AI</h1>
+              <Logo/>
+              <h1 className="text-3xl font-bold ml-0 text-custom-pink">AI</h1>
             </div>
             <div className="flex items-center gap-2">
             {(onLearn)&&<Button onClick={handleLearnClick}>Revise from this Chat</Button>}

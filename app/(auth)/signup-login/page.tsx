@@ -1,5 +1,6 @@
 "use client";
 import Login from '@/app/Components/Login';
+import ParticlsBackground from '@/app/Components/ParticlsBackground';
 import Signup from '@/app/Components/Signup';
 import SignupLoginText from '@/app/Components/SignupLoginText';
 import { RootState } from '@/app/GlobalRedux/store';
@@ -13,12 +14,9 @@ const SignupLogin = (props: Props) => {
 
   return (
     <div className="relative w-screen h-screen flex justify-center items-center">
-      <div
-        className="absolute inset-0 bg-cover bg-center blur-sm"
-        style={{
-          backgroundImage: 'url("https://images.unsplash.com/photo-1715576858936-5f3e0249673f?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")',
-        }}
-      />
+       <ParticlsBackground>
+        
+       </ParticlsBackground>
       <div id='gradient card'
   className="w-[60%]  h-[65%] flex rounded-3xl  shadow-2xl "
   style={{

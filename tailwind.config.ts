@@ -7,7 +7,11 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        'custom-pink': '#cb00d3',
+      },
+    },
   },
   plugins: [require('@tailwindcss/typography')],
 };
