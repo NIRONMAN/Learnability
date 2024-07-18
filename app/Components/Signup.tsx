@@ -7,8 +7,6 @@ import { auth } from '@/utils/firebase'
 import { useDispatch, useSelector } from 'react-redux'
 import { setUser } from '../GlobalRedux/Features/auth/authSlice'
 
-import Cookies from "js-cookie"
-import { RootState } from '../GlobalRedux/store'
 import { useRouter } from 'next/navigation'
 
 
@@ -22,7 +20,7 @@ const Signup = () => {
   const router=useRouter()
   return (
     <div className="h-full w-full flex flex-col items-center justify-center ">
-            <div className=' bg-gray-400 rounded-2xl p-3'>
+            <div className=' bg-[#B7C9F2] rounded-2xl p-3'>
 
       <h2 className="text-3xl font-bold text-center py-2 pb-5">Sign Up</h2>
    

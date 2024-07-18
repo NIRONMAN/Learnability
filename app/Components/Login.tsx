@@ -17,7 +17,7 @@ const Login = (props: Props) => {
   })
   return (
     <div className="h-full w-full flex flex-col items-center justify-center">
-      <div className=' bg-gray-400 rounded-2xl p-4'>
+      <div className=' bg-[#B7C9F2] rounded-2xl p-4'>
       <h2 className="text-3xl font-bold py-6 text-center">Login</h2>
              
              <LableComponent handleChange={(e)=>{

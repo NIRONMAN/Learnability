@@ -13,7 +13,8 @@ type Props = {
 const MarkdownContent = ({ rawText }: Props) => {
     const result = md.render(rawText);
     const clean = DOMPurify.sanitize(result);
-
+    
+    md
     return (
         <div className="prose prose-sm prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: clean }}></div>
     );

@@ -7,7 +7,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/app/GlobalRedux/store';
 import { setSessions } from '@/app/GlobalRedux/Features/sessions/sessionsSlice';
 import { createSession, getSession, getUserSessions } from '@/utils/functions';
-import MarkdownContent from '../Components/Markdown';
 import { setOnLearn } from '../GlobalRedux/Features/string/stringSlice';
 import { clearUser } from '../GlobalRedux/Features/auth/authSlice';
 import Logo from '../Components/Logo';
@@ -123,7 +122,7 @@ const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className="flex h-screen">
-      <aside className={`bg-gray-800 text-white transition-all duration-300 ${collapsed ? 'w-0' : 'w-1/3'}`}>
+      <aside className={`bg-gray-800 text-white transition-all duration-300 ${collapsed ? 'w-0' : 'w-1/4'}`}>
         <div className="p-4">
           {!collapsed && (
             <Select
@@ -146,7 +145,8 @@ const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => {
                 className="px-4 py-2 hover:bg-gray-700 cursor-pointer border border-gray-700 rounded-md m-2"
                 onClick={() => handleSessionClick(session.sessionId,session.sessionType)}
               >
-                <div className=' h-12 overflow-hidden'><MarkdownContent rawText={session.title}></MarkdownContent></div>
+                 <span className=" text-sm">{session.title}</span>
+
                 <br />
                 <span className="text-xs text-gray-400">{session.sessionType}</span>
               </li>
@@ -169,6 +169,9 @@ const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => {
               <h1 className="text-3xl font-bold ml-0 text-custom-pink">AI</h1>
             </div>
             <div className="flex items-center gap-2">
+              <Button onClick={()=>{
+                router.push("/flashcard-maker") 
+              }}>Flashcard</Button>
             {(onLearn)&&<Button onClick={handleLearnClick}>Revise from this Chat</Button>}
               
               <Dropdown menu={{ items: item }} trigger={['click']}>
@@ -180,7 +183,7 @@ const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => {
             </div>
           </div>
         </header>
-        <main className="flex-grow overflow-auto">
+        <main className="h-full">
           {children}
         </main>
       </div>
