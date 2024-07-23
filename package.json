@@ -22,7 +22,7 @@
     "@types/firebase": "^3.2.1",
     "@vertx/core": "^4.5.1",
     "ai": "^3.1.36",
-    "antd": "^5.18.3",
+    "antd": "^5.19.1",
     "audiobuffer-to-wav": "^1.0.0",
     "axios": "^1.7.2",
     "cookies-next": "^4.2.1",
@@ -38,7 +38,7 @@
     "mermaid": "^10.9.1",
     "next": "14.2.4",
     "pdf-parse": "^1.1.1",
-    "pdfjs-dist": "^3.4.120",
+    "pdfjs-dist": "^4.4.168",
     "pspdfkit": "^2024.3.2",
     "react": "^18",
     "react-dom": "^18",
@@ -48,7 +48,8 @@
     "stream-to-buffer": "^0.1.0",
     "tough-cookie": "^4.1.4",
     "youtube-dl-exec": "^3.0.6",
-    "ytdl-core": "^4.11.5"
+    "ytdl-core": "^4.11.5",
+    "zod-to-json-schema": "^3.23.1"
   },
   "devDependencies": {
     "@types/dompurify": "^3.0.5",

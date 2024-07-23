@@ -21,8 +21,8 @@ import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import ParticlsBackground from "@/app/Components/ParticlsBackground";
-// import Particles from '@tsparticles/react'
-// import particlesConfig from "@/app/Components/config/particlesConfig";
+import Particles from '@tsparticles/react'
+//import particlesConfig from "@/app/Components/config/particlesConfig";
 
 
 import removeMarkdown from "markdown-to-text"
@@ -261,7 +261,8 @@ const Page = () => {
             </>
           }
           {step===4&&<div className={"w-full flex justify-center items-center flex-col "+`opacity-0 transition-opacity duration-1000 ease-in-out ${opacity}`}>
-            <h1 className=" text-2xl font-bold font-serif">Let's Start</h1>
+          <h1 className="text-2xl font-bold font-serif">Let&apos;s Start</h1>
+
             <Button onClick={handleFinalClick} className="mt-4">
             Here
           </Button>
