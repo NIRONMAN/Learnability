@@ -24,6 +24,7 @@ import ParticlsBackground from "@/app/Components/ParticlsBackground";
 // import Particles from '@tsparticles/react'
 // import particlesConfig from "@/app/Components/config/particlesConfig";
 
+
 import removeMarkdown from "markdown-to-text"
 const Page = () => {
   const router = useRouter();
@@ -117,7 +118,7 @@ const Page = () => {
     try {
       if (contextType === "ytlink") {
         if (localurl) {
-          const res = await axios.post("/api/extract", { url: localurl });
+          const res = await axios.post("/api/ytExtracter", { url: localurl });
           setLocalContext({
             context: res.data.result.context,
             title: res.data.result.title,

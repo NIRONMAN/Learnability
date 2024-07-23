@@ -114,7 +114,7 @@ const page = (props: Props) => {
           {(sessionData.contextType==="ytlink")&&<YtVidRenderer url={sessionData.fileUrl} ></YtVidRenderer>}
           {(sessionData.contextType==="pdf")&&<PdfViewer objectUrl={sessionData.fileUrl}></PdfViewer>}
         </div>
-        <div className={`col-span-5 h-full`}>
+        <div className={`col-span-5 flex-grow w-full overflow-y-auto`}>
         <ChatBot 
           MessageList={LMessageList}
           handleInputChange={handleInputChange}

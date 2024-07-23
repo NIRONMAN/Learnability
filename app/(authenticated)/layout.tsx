@@ -180,9 +180,11 @@ const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => {
             </div>
           </div>
         </header>
-        <main className="h-full">
+        <div style={{height:'100px'}}>
+          
           {children}
-        </main>
+          
+        </div>
       </div>
     </div>
   );
