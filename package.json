@@ -48,7 +48,8 @@
     "stream-to-buffer": "^0.1.0",
     "tough-cookie": "^4.1.4",
     "youtube-dl-exec": "^3.0.6",
-    "ytdl-core": "^4.11.5"
+    "ytdl-core": "^4.11.5",
+    "zod-to-json-schema": "^3.23.1"
   },
   "devDependencies": {
     "@types/dompurify": "^3.0.5",

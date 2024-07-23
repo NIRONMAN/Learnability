@@ -3,6 +3,7 @@ import Logo from './Logo';
 
 const Header: React.FC = () => {
   return (
+    
     <header className="w-full p-4 flex justify-between items-center">
       <div className="flex items-center">
         <Logo />
@@ -14,6 +15,8 @@ const Header: React.FC = () => {
         <a href="#contact" className="px-4">Contact</a>
       </nav>
     </header>
+    
+    
   );
 };
 

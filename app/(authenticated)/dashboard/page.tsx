@@ -260,7 +260,8 @@ const Page = () => {
             </>
           }
           {step===4&&<div className={"w-full flex justify-center items-center flex-col "+`opacity-0 transition-opacity duration-1000 ease-in-out ${opacity}`}>
-            <h1 className=" text-2xl font-bold font-serif">Let&aposs Start</h1>
+          <h1 className="text-2xl font-bold font-serif">Let&apos;s Start</h1>
+
             <Button onClick={handleFinalClick} className="mt-4">
             Here
           </Button>
