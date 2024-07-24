@@ -1,16 +1,24 @@
 // import Particles from '@tsparticles/react'
 import particlesConfig from './config/particlesConfig'
+import lightThemeParticles from './config/lightThemeParticles'
 import { useCallback, useEffect, useState } from "react";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import type { Container, Engine } from "@tsparticles/engine";
 // import { loadAll } from "@/tsparticles/all"; // if you are going to use `loadAll`, install the "@tsparticles/all" package too.
 // import { loadFull } from "tsparticles"; // if you are going to use `loadFull`, install the "tsparticles" package too.
 import { loadSlim } from "@tsparticles/slim"; 
+import { UseSelector, useSelector } from 'react-redux';
 
 
 
 
 const ParticlsBackground = () => {
+    const isDarkTheme = useSelector((state:RootState)=> state.colour.themeDark)
+    let particles = particlesConfig;
+    if(isDarkTheme == false){
+        particles = lightThemeParticles
+    }
+
 
     const [ init, setInit ] = useState(false);
 
@@ -33,7 +41,7 @@ const ParticlsBackground = () => {
         console.log(container);
     };
   return (
-     <Particles className="-z-10" options={particlesConfig} particlesLoaded={particlesLoaded}></Particles>
+     <Particles className="-z-10" options={particles} particlesLoaded={particlesLoaded}></Particles>
   )
 }
 
