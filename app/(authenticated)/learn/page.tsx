@@ -108,7 +108,7 @@ const page = (props: Props) => {
       }
 
   return (
-    <div className=' grid grid-cols-10 bg-[#232323] ' style={{height:'calc(100vh - 56px)'}}>
+    <div className=' grid grid-cols-10 bg-[#232323] ' style={{height:'calc(100vh - 84px)'}}>
       
         <div className={`col-span-5`}>
           {(sessionData.contextType==="ytlink")&&<YtVidRenderer url={sessionData.fileUrl} ></YtVidRenderer>}

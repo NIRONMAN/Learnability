@@ -92,7 +92,6 @@ const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => {
   async function handleLearnClick(){
 
    const res= await getSession(userandSession.sessionId,userandSession.userId)
-   console.log("the get ",res)
    try {
     const newsessionId = await createSession(
       {
@@ -122,7 +121,7 @@ const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <div className="flex h-screen">
-      <aside className={`bg-gray-800 text-white transition-all duration-300 ${collapsed ? 'w-0' : 'w-1/4'}`}>
+      <aside className={`bg-gray-900 text-white transition-all duration-300 ${collapsed ? 'w-0' : 'w-1/4'}`}>
         <div className="p-4">
           {!collapsed && (
             <Select
@@ -155,7 +154,7 @@ const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => {
         </nav>
       </aside>
       <div className="flex flex-col flex-grow">
-        <header className="text-[#F5E8C7] shadow">
+        <header className="text-[#F5E8C7] shadow bg-black">
           <div className="flex justify-between items-center px-4 py-2">
             <div className="flex items-center">
               <Button
@@ -183,11 +182,11 @@ const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => {
             </div>
           </div>
         </header>
-        <div style={{height:'100px'}}>
+        <main className=' h-full'>
           
           {children}
           
-        </div>
+        </main>
       </div>
     </div>
   );

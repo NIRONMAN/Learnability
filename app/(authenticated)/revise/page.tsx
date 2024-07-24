@@ -114,8 +114,8 @@ const RevisingPage = () => {
 
   return (
     <SuggestionsProvider>
-      <div className="h-full bg-[#121212] grid grid-cols-10 text-white">
-       <div className=' col-span-7'>
+      <div className=" bg-[#121212] grid grid-cols-10 text-white" style={{height:'calc(100vh - 84px)'}}>
+       <div className=' col-span-8 overflow-y-auto'>
 
         <ChatBot 
           MessageList={MessageList}
@@ -126,7 +126,7 @@ const RevisingPage = () => {
           isLoading={isLoading}
           />
           </div>
-        <div className="col-span-3 bg-[#333333] flex flex-col items-center">
+        <div className="col-span-2 bg-[#333333] flex flex-col items-center">
           <h1 className='p-4'>Suggestions</h1>
           <div className='flex flex-grow flex-col gap-2'>
             <Button type='dashed' onClick={() => setInput("Skip this Question")}>Skip this Question</Button>

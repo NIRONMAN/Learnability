@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import MarkdownContent from '../Components/Markdown';
 
 interface Props {
@@ -6,12 +6,16 @@ interface Props {
 }
 
 function LMessageList({ arr }: Props) {
+    
     const endRef=useRef(null)
     const scrollToBottom = () => {
         if (endRef.current) {
             endRef.current.scrollIntoView({ behavior: 'smooth' });
         }
     };
+    useEffect(()=>{
+        scrollToBottom();
+    },[arr])
 
     return (
         <div id="chatElement" className="text-white flex flex-col">
