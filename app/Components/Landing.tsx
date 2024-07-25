@@ -5,9 +5,12 @@ import { setDark, setLight } from "@/app/GlobalRedux/Features/colours/coloursSli
 import { SunOutlined, MoonOutlined } from '@ant-design/icons';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/app/GlobalRedux/store';
-import { Image } from 'antd';
+import Image from 'next/image';
 import character from '../../public/Learnability (GenAi) logo svg/character.svg'
-
+import tutor from '../../public/tutor.svg'
+import revision from '../../public/revision.svg'
+import flashcard from '../../public/flashcard.svg'
+import mindmap from '../../public/mindmap.svg'
 
 const Landing: React.FC = () => {
   const dispatch = useDispatch();
@@ -34,8 +37,8 @@ const Landing: React.FC = () => {
       </header>
       
       {/* Main Section */}
-      <div className="flex flex-col md:flex-row items-center justify-between  bg-white min-h-screen px-12">
-  <div className="flex flex-col items-start space-y-4 max-w-xl -mt-36">
+      <div className="flex flex-col md:flex-row items-center justify-between bg-white px-14 p-7">
+  <div className="flex flex-col items-start space-y-3 max-w-xl -mt-11">
   <h2 className="text-lg font-semibold text-gray-600 border-2 border-black rounded-2xl p-1">Welcome to Learnability AI-Your Study Companion</h2>
     <h1 className="text-5xl font-serif font-bold text-black leading-tight">Your Path to Academic Excellence </h1>
     <p className="text-gray-700 text-md max-w-lg">At Learnability, we understand that every student is unique, and so are their learning needs. Our mission is to match students with experienced and caring tutors who will provide personalized support, inspire confidence, and ignite a passion for learning.</p>
@@ -43,59 +46,50 @@ const Landing: React.FC = () => {
       <button className="bg-purple-600 text-white px-6 py-3 rounded-full hover:bg-purple-500">Get Started</button>
     </div>
   </div>
-  <div className="flex flex-col items-center mt-8 md:mt-0">
-  <Image src={character} alt="Boy Studying" className="w-full  max-w-md" />
-        </div>
+  <div className="flex flex-col items-center overflow-x-visible pt-0">
+  <Image src={character} alt="Boy Studying" className="w-full max-w-md pb-5" style={{ transform: 'translateY(45px)' }} />
+</div>
+
+
 </div>
 
 {/* Features Section */}
-<div className="bg-gray-100 py-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-extrabold text-gray-900 mb-6 text-center">Features</h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div className="flex flex-col items-center">
-              <div className="bg-purple-500 text-white rounded-full p-4 mb-4">
-                {/* Add feature icon */}
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path>
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900">Personalized Learning</h3>
-              <p className="text-gray-600 text-center mt-2">Personalized tutor to fit each student&apos;s unique needs.</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="bg-purple-500 text-white rounded-full p-4 mb-4">
-                {/* Add feature icon */}
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path>
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900">Master Your Knowledge</h3>
-              <p className="text-gray-600 text-center mt-2">Revision Section: Revise and test with Our Interactive Tutor.</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="bg-purple-500 text-white rounded-full p-4 mb-4">
-                {/* Add feature icon */}
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path>
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900">Boost Your Retention</h3>
-              <p className="text-gray-600 text-center mt-2">Flashcard Section: Interactive Flashcards for Efficient Learning.</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <div className="bg-purple-500 text-white rounded-full p-4 mb-4">
-                {/* Add feature icon */}
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4"></path>
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold text-gray-900">See It, Remember It</h3>
-              <p className="text-gray-600 text-center mt-2">Mindmap Section: Study Smarter, Not Harder.</p>
-            </div>
-          </div>
+<div className="bg-gray-100 py-2">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h2 className="text-2xl font-extrabold text-gray-900 mb-6 text-center">Features</h2>
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div className="flex flex-col items-center">
+        <div >
+          <Image src={tutor} alt="Personalized Learning" className="w-16 h-17" /> 
         </div>
+        <h3 className="text-lg font-semibold text-gray-900">Personalized Learning</h3>
+        <p className="text-gray-600 text-center mt-2">Personalized tutor to fit each student&apos;s unique needs.</p>
       </div>
+      <div className="flex flex-col items-center">
+        <div className="bg-purple-500 text-white rounded-full p-1 mb-4 flex items-center justify-center w-14 h-14"> 
+          <Image src={revision} alt="Master Your Knowledge" className="w-14 h-14" />
+        </div>
+        <h3 className="text-lg font-semibold text-gray-900">Master Your Knowledge</h3>
+        <p className="text-gray-600 text-center mt-2">Revision Section: Revise and test with Our Interactive Tutor.</p>
+      </div>
+      <div className="flex flex-col items-center">
+        <div className="bg-teal-400 text-white rounded-full p-1 mb-4 flex items-center justify-center w-14 h-14"> 
+          <Image src={flashcard} alt="Boost Your Retention" className="w-14 h-14" /> 
+        </div>
+        <h3 className="text-lg font-semibold text-gray-900">Boost Your Retention</h3>
+        <p className="text-gray-600 text-center mt-2">Flashcard Section: Interactive Flashcards for Efficient Learning.</p>
+      </div>
+      <div className="flex flex-col items-center">
+        <div >
+          <Image src={mindmap} alt="See It, Remember It" className="w-14 h-17" /> 
+        </div>
+        <h3 className="text-lg font-semibold text-gray-900">See It, Remember It</h3>
+        <p className="text-gray-600 text-center mt-2">Mindmap Section: Study Smarter, Not Harder.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 
     {/* Additional Section */}
        <div className="bg-white py-8">
