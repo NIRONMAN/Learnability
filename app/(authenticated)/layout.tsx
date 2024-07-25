@@ -1,7 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
 import { Menu, Button, Avatar, Dropdown, Select, message, MenuItemProps, MenuProps } from 'antd';
-import { LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined, ProfileOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
+import {SunOutlined ,MoonOutlined , LogoutOutlined, MenuFoldOutlined, MenuUnfoldOutlined, ProfileOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/navigation';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/app/GlobalRedux/store';
@@ -10,10 +10,12 @@ import { createSession, getSession, getUserSessions } from '@/utils/functions';
 import { setOnLearn } from '../GlobalRedux/Features/string/stringSlice';
 import { clearUser } from '../GlobalRedux/Features/auth/authSlice';
 import Logo from '../Components/Logo';
+import { setDark, setLight } from "@/app/GlobalRedux/Features/colours/coloursSlice";
 
 const { Option } = Select;
 
 const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => {
+  const isDarkTheme = useSelector((state:RootState)=> state.colour.themeDark)
   const [collapsed, setCollapsed] = useState(true);
   const [filter, setFilter] = useState('all');
   const { user } = useSelector((state: RootState) => state.auth);
@@ -168,11 +170,15 @@ const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => {
               <h1 className="text-3xl font-bold ml-0 text-custom-pink">AI</h1>
             </div>
             <div className="flex items-center gap-2">
+              {isDarkTheme?<SunOutlined onClick={()=>{
+                dispatch(setLight())
+              }}/>: <MoonOutlined onClick={()=>{
+                dispatch(setDark())
+              }}/>}
               <Button onClick={()=>{
                 router.push("/flashcard-maker") 
               }}>Flashcard</Button>
             {(onLearn)&&<Button onClick={handleLearnClick}>Revise from this Chat</Button>}
-              
               <Dropdown menu={{ items: item }} trigger={['click']}>
                 <a className="flex items-center" onClick={e => {e.preventDefault()}}>
                   <Avatar icon={<UserOutlined />} className="mr-2" />
