@@ -62,28 +62,16 @@
 "use client";
 import React from "react";
 import ParticlsBackground from "./Components/ParticlsBackground";
-import Header from "./Components/Header";
-import MainContent from "./Components/MainContent";
-
-
-
+import Landing from "./Components/Landing";
 
 const Page = () => {
-
-   return (
-    <div className="min-h-screen  flex flex-col">
-      <ParticlsBackground/>
-      <Header />
+  return (
+    <div className="min-h-screen flex flex-col">
+      <ParticlsBackground />
+      <Landing />
       <div className="flex-grow flex flex-col items-center justify-center">
-        <MainContent />
       </div>
-      <footer className="w-full p-4 flex justify-center items-center bg-gray-700">
-        <p className="text-white text-center">© 2024 Learnability. All rights reserved.</p>
-      </footer>
-
-        
-      
-    </div>  
+    </div>
   );
 };
 

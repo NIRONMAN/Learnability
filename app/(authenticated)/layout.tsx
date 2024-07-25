@@ -167,7 +167,7 @@ const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => {
                 className="text-lg w-10 h-10"
               />
               <Logo/>
-              <h1 className="text-3xl font-bold ml-0 text-custom-pink">AI</h1>
+              <h1 className="text-2xl font-bold ml-0 text-custom-pink">AI</h1>
             </div>
             <div className="flex items-center gap-2">
               {isDarkTheme?<SunOutlined onClick={()=>{
