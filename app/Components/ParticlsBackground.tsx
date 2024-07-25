@@ -8,6 +8,7 @@ import type { Container, Engine } from "@tsparticles/engine";
 // import { loadFull } from "tsparticles"; // if you are going to use `loadFull`, install the "tsparticles" package too.
 import { loadSlim } from "@tsparticles/slim"; 
 import { UseSelector, useSelector } from 'react-redux';
+import { RootState } from '../GlobalRedux/store';
 
 
 

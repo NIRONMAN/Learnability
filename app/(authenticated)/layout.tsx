@@ -175,9 +175,7 @@ const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => {
               }}/>: <MoonOutlined onClick={()=>{
                 dispatch(setDark())
               }}/>}
-              <Button onClick={()=>{
-                router.push("/flashcard-maker") 
-              }}>Flashcard</Button>
+              
             {(onLearn)&&<Button onClick={handleLearnClick}>Revise from this Chat</Button>}
               <Dropdown menu={{ items: item }} trigger={['click']}>
                 <a className="flex items-center" onClick={e => {e.preventDefault()}}>
