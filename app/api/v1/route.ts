@@ -1,6 +1,21 @@
 import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from '@google/generative-ai';
 import { GenerateTextResult, GoogleGenerativeAIStream, StreamingTextResponse } from 'ai';
 
+const apiKeys = [
+  process.env.API_KEY1!,
+  process.env.API_KEY2!,
+  process.env.API_KEY3!,
+  process.env.API_KEY4!,
+  process.env.API_KEY5!
+];
+
+let currentKeyIndex = 0;
+
+function getNextApiKey() {
+  const apiKey = apiKeys[currentKeyIndex];
+  currentKeyIndex = (currentKeyIndex + 1) % apiKeys.length;
+  return apiKey;
+}
 export async function POST(req: Request, res: Response) {
     const body = await req.json();
     const systemPrompt=body.data.systemPrompt;
@@ -9,7 +24,7 @@ export async function POST(req: Request, res: Response) {
 
     const fullPrompt = `${context}\n${prompt}`;
 
-    const genAI = new GoogleGenerativeAI(process.env.API_KEY2!);
+    const genAI = new GoogleGenerativeAI(getNextApiKey());
     const safetySetting = [
         {
           category: HarmCategory.HARM_CATEGORY_HARASSMENT,
