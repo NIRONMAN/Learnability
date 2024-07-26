@@ -1,125 +1,144 @@
 "use client";
-import React from 'react';
-import Logo from './Logo';
-import { setDark, setLight } from "@/app/GlobalRedux/Features/colours/coloursSlice";
-import { SunOutlined, MoonOutlined } from '@ant-design/icons';
-import { useSelector, useDispatch } from 'react-redux';
-import { RootState } from '@/app/GlobalRedux/store';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
-import character from '../../public/Learnability (GenAi) logo svg/character.svg'
-import tutor from '../../public/tutor.svg'
-import revision from '../../public/revision.svg'
-import flashcard from '../../public/flashcard.svg'
-import mindmap from '../../public/mindmap.svg'
+import Logo from './Logo';
+import ThemeToggle from './ThemeToggle';
+import character from '../../public/Learnability (GenAi) logo svg/character.svg';
+import tutor from '../../public/tutor.svg';
+import revision from '../../public/revision.svg';
+import flashcard from '../../public/flashcard.svg';
+import mindmap from '../../public/mindmap.svg';
+import Link from 'next/link';
 
 const Landing: React.FC = () => {
-  const dispatch = useDispatch();
-  const isDarkTheme = useSelector((state: RootState) => state.colour.themeDark);
+  const [visibleSection, setVisibleSection] = useState('main');
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const mainSection = document.getElementById('main-section');
+      const featuresSection = document.getElementById('features-section');
+      const additionalSection = document.getElementById('additional-section');
+
+      if (mainSection && featuresSection && additionalSection) {
+        const scrollPosition = window.scrollY + window.innerHeight / 2;
+        const mainPosition = mainSection.offsetTop;
+        const featuresPosition = featuresSection.offsetTop;
+        const additionalPosition = additionalSection.offsetTop;
+
+        if (scrollPosition > additionalPosition) {
+          setVisibleSection('additional');
+        } else if (scrollPosition > featuresPosition) {
+          setVisibleSection('features');
+        } else {
+          setVisibleSection('main');
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   return (
-    <div>
+    <div className="bg-gray-50 dark:bg-gray-900 min-h-screen">
       {/* Header Section */}
-      <header className="w-full p-4 flex justify-between items-center bg-black shadow-white shadow-sm">
+      <header className="w-full p-4 flex justify-between items-center bg-gray-800 dark:bg-gray-800 shadow-lg h-[56px]">
         <div className="flex items-center">
-          <Logo />
-          <h1 className="text-2xl font-bold ml-0 text-custom-pink">AI</h1>
+          <div className=" p-1">
+            <Logo />
+          </div>
+          <h1 className="text-2xl font-bold ml-2 text-white">.ai</h1>
         </div>
-        <nav className="text-white flex items-center space-x-4">
-          {isDarkTheme ? (
-            <SunOutlined onClick={() => dispatch(setLight())} />
-          ) : (
-            <MoonOutlined onClick={() => dispatch(setDark())} />
-          )}
-          <a href="#home" className="px-4 border-r border-white">Home</a>
-          <a href="#about" className="px-4 border-r border-white">About Us</a>
-          <a href="#contact" className="px-4">Contact</a>
+        <nav className="flex items-center space-x-6">
+          <a href="#home" className="text-white hover:text-purple-200 transition-colors">Home</a>
+          <a href="#about" className="text-white hover:text-purple-200 transition-colors">About Us</a>
+          <a href="#contact" className="text-white hover:text-purple-200 transition-colors">Contact</a>
+          <ThemeToggle />
         </nav>
       </header>
-      
+
       {/* Main Section */}
-      <div className="flex flex-col md:flex-row items-center justify-between bg-white px-14 p-7">
-  <div className="flex flex-col items-start space-y-3 max-w-xl -mt-11">
-  <h2 className="text-lg font-semibold text-gray-600 border-2 border-black rounded-2xl p-1">Welcome to Learnability AI-Your Study Companion</h2>
-    <h1 className="text-5xl font-serif font-bold text-black leading-tight">Your Path to Academic Excellence </h1>
-    <p className="text-gray-700 text-md max-w-lg">At Learnability, we understand that every student is unique, and so are their learning needs. Our mission is to match students with experienced and caring tutors who will provide personalized support, inspire confidence, and ignite a passion for learning.</p>
-    <div className="flex space-x-4">
-      <button className="bg-purple-600 text-white px-6 py-3 rounded-full hover:bg-purple-500">Get Started</button>
-    </div>
-  </div>
-  <div className="flex flex-col items-center overflow-x-visible pt-0">
-  <Image src={character} alt="Boy Studying" className="w-full max-w-md pb-5" style={{ transform: 'translateY(45px)' }} />
-</div>
-
-
-</div>
-
-{/* Features Section */}
-<div className="bg-gray-100 py-2">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <h2 className="text-2xl font-extrabold text-gray-900 mb-6 text-center">Features</h2>
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-      <div className="flex flex-col items-center">
-        <div >
-          <Image src={tutor} alt="Personalized Learning" className="w-16 h-17" /> 
-        </div>
-        <h3 className="text-lg font-semibold text-gray-900">Personalized Learning</h3>
-        <p className="text-gray-600 text-center mt-2">Personalized tutor to fit each student&apos;s unique needs.</p>
-      </div>
-      <div className="flex flex-col items-center">
-        <div className="bg-purple-500 text-white rounded-full p-1 mb-4 flex items-center justify-center w-14 h-14"> 
-          <Image src={revision} alt="Master Your Knowledge" className="w-14 h-14" />
-        </div>
-        <h3 className="text-lg font-semibold text-gray-900">Master Your Knowledge</h3>
-        <p className="text-gray-600 text-center mt-2">Revision Section: Revise and test with Our Interactive Tutor.</p>
-      </div>
-      <div className="flex flex-col items-center">
-        <div className="bg-teal-400 text-white rounded-full p-1 mb-4 flex items-center justify-center w-14 h-14"> 
-          <Image src={flashcard} alt="Boost Your Retention" className="w-14 h-14" /> 
-        </div>
-        <h3 className="text-lg font-semibold text-gray-900">Boost Your Retention</h3>
-        <p className="text-gray-600 text-center mt-2">Flashcard Section: Interactive Flashcards for Efficient Learning.</p>
-      </div>
-      <div className="flex flex-col items-center">
-        <div >
-          <Image src={mindmap} alt="See It, Remember It" className="w-14 h-17" /> 
-        </div>
-        <h3 className="text-lg font-semibold text-gray-900">See It, Remember It</h3>
-        <p className="text-gray-600 text-center mt-2">Mindmap Section: Study Smarter, Not Harder.</p>
-      </div>
-    </div>
-  </div>
-</div>
-
-
-    {/* Additional Section */}
-       <div className="bg-white py-8">
-       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-         <div className="lg:text-center">
-           <h2 className="text-base text-indigo-600 font-semibold tracking-wide uppercase">Tutor Very Engaging And Strategic/Effective</h2>
-           <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
-             Learn more about our Personalised Tutor
-           </p>
-           <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-             View more
-           </p>
-         </div>
-       </div>
-     </div>
-
-     {/* Footer Section */}
-     <footer className="bg-black text-white py-4">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center">
-          <div className="text-center md:text-left">
-            <p>&copy; 2024 Learnability AI. All rights reserved.</p>
+      <section
+        id="main-section"
+        className={`transition-all duration-1000 ease-out transform ${
+          visibleSection === 'main' ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
+        } py-20 bg-gradient-to-b from-purple-100 to-white dark:from-gray-800 dark:to-gray-900`}
+      >
+        <div className="container mx-auto px-4 flex flex-col md:flex-row items-center justify-between">
+          <div className="md:w-1/2 mb-10 md:mb-0">
+            <h2 className="text-lg font-semibold text-purple-600 dark:text-purple-400 mb-4">Welcome to Learnability AI - Your Study Companion</h2>
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white leading-tight mb-6">Your Path to Academic Excellence</h1>
+            <p className="text-gray-700 dark:text-gray-300 text-lg mb-8">At Learnability, we understand that every student is unique. Our mission is to match you with experienced tutors who will provide personalized support, inspire confidence, and ignite your passion for learning.</p>
+            <Link href={"/signup-login"}>
+            <button  className="bg-purple-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-purple-700 transition-colors shadow-md hover:shadow-lg">Get Started</button>
+            </Link>
           </div>
-          <div className="flex space-x-4 mt-4 md:mt-0">
-            <a href="#privacy" className="text-white">Privacy Policy</a>
-            <a href="#terms" className="text-white">Terms of Service</a>
-            <a href="#social" className="text-white">Social Media</a>
+          <div className="md:w-1/2 ">
+            <Image src={character} alt="Boy Studying" className="w-full max-w-md mx-auto mt-[18px]" />
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section
+        id="features-section"
+        className={`transition-all duration-1000 ease-out transform ${
+          visibleSection === 'features' ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
+        } bg-white dark:bg-gray-800 py-20`}
+      >
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">Our Features</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              { icon: tutor, title: "Personalized Learning", description: "Tailored tutoring to fit each student's unique needs." },
+              { icon: revision, title: "Master Your Knowledge", description: "Interactive revision sessions to reinforce learning." },
+              { icon: flashcard, title: "Boost Your Retention", description: "Engaging flashcards for efficient memorization." },
+              { icon: mindmap, title: "See It, Remember It", description: "Visual mind maps to enhance understanding." },
+            ].map((feature, index) => (
+              <div key={index} className="bg-purple-50 dark:bg-gray-700 p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow">
+                <div className="w-16 h-16 mx-auto mb-4 bg-purple-100 dark:bg-gray-600 rounded-full p-3">
+                  <Image src={feature.icon} alt={feature.title} className="w-full h-full" />
+                </div>
+                <h3 className="text-xl font-semibold text-gray-900 dark:text-white text-center mb-2">{feature.title}</h3>
+                <p className="text-gray-600 dark:text-gray-300 text-center">{feature.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Additional Section */}
+      <section
+        id="additional-section"
+        className={`transition-all duration-1000 ease-out transform ${
+          visibleSection === 'additional' ? 'translate-y-0 opacity-100' : 'translate-y-20 opacity-0'
+        } bg-purple-50 dark:bg-gray-900 py-20`}
+      >
+        <div className="container mx-auto px-4 text-center">
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">Discover Our Personalized Tutor</h2>
+          <p className="text-xl text-gray-700 dark:text-gray-300 mb-8">Experience engaging and effective learning strategies tailored just for you.</p>
+          <button className="bg-purple-600 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-purple-700 transition-colors shadow-md hover:shadow-lg">Learn More</button>
+        </div>
+      </section>
+
+      {/* Footer Section */}
+      <footer className="bg-gray-900 text-white py-8">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="mb-4 md:mb-0">
+              <p>&copy; 2024 Learnability AI. All rights reserved.</p>
+            </div>
+            <div className="flex space-x-6">
+              <a href="#privacy" className="hover:text-purple-400 transition-colors">Privacy Policy</a>
+              <a href="#terms" className="hover:text-purple-400 transition-colors">Terms of Service</a>
+              <a href="#social" className="hover:text-purple-400 transition-colors">Social Media</a>
+            </div>
           </div>
         </div>
       </footer>
-     </div>
+    </div>
   );
 };
 

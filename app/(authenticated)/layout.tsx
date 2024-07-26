@@ -123,7 +123,6 @@ const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => {
   }
 
   return (
-    <ThemeProvider attribute='class'>
 
     <div className="flex h-screen">
       <aside className={`bg-gray-900 text-white transition-all duration-300 ${collapsed ? 'w-0' : 'w-1/4'}`}>
@@ -161,7 +160,7 @@ const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => {
       <div className="flex flex-col flex-grow">
         <header className="text-[#F5E8C7] shadow bg-black">
           <div className="flex justify-between items-center px-4 py-2">
-            <div className="flex items-center">
+            <div className="flex items-center gap-2">
               <Button
                 type="text"
                 icon={collapsed ?  <MenuUnfoldOutlined style={{ color: 'white',fontSize:'1.5rem' }} /> : 
@@ -169,8 +168,9 @@ const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => {
                 onClick={toggleSidebar}
                 className="text-lg w-10 h-10"
               />
-              <Logo/>
-              <h1 className="text-2xl font-bold ml-0 text-custom-pink">AI</h1>
+
+              <Logo />
+              <h1 className="text-2xl font-bold ml-0 text-custom-pink">.ai</h1>
             </div>
             <div className="flex items-center gap-2">
               <ThemeToggle></ThemeToggle>
@@ -191,7 +191,6 @@ const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => {
         </main>
       </div>
     </div>
-    </ThemeProvider>
   );
 };
 

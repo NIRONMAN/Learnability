@@ -9,7 +9,7 @@ export async function POST(req: Request, res: Response) {
 
     const fullPrompt = `${context}\n${prompt}`;
 
-    const genAI = new GoogleGenerativeAI(process.env.API_KEY!);
+    const genAI = new GoogleGenerativeAI(process.env.API_KEY2!);
     const safetySetting = [
         {
           category: HarmCategory.HARM_CATEGORY_HARASSMENT,
