@@ -10,7 +10,7 @@ import fs from "fs";
 import path from "path";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-const genAI = new GoogleGenerativeAI(process.env.API_KEY);
+const genAI = new GoogleGenerativeAI(process.env.API_KEY2);
 const YT_DLP_PATH = `"${path.resolve("bin", "yt-dlp")}"`;
 
 const model = genAI.getGenerativeModel({

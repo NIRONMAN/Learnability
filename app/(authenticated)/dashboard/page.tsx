@@ -155,7 +155,7 @@ const Page = () => {
           
           <Card 
             title={<span className="text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-green-300 via-teal-300 to-blue-300">Add Your Study Material</span>} 
-            className="w-full mb-8 bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 border border-cyan-600 text-center"
+            className="w-full mb-8 bg-gradient-to-r from-gray-800 via-gray-900 to-gray-800 border border-cyan-600 text-center "
             headStyle={{ borderBottom: '1px solid #4a5568', background: 'transparent' }}
             bodyStyle={{ background: 'transparent' }}
           >
