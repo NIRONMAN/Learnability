@@ -71,7 +71,7 @@ import { getSession, sessionProps } from '@/utils/functions'
 
         },[sessionData])
       return (
-<div className="flex justify-center items-center min-h-screen bg-gray-900 border-2 border-white ">
+<div className="flex justify-center items-center bg-gray-900 border-2 border-white " style={{height:'calc(100vh - 56px)'}}>
       {!isLoading?<MermaidChart chart={response} />:<Spin size='large'></Spin>}
     </div>    
     )

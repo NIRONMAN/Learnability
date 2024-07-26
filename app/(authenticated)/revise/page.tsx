@@ -114,7 +114,7 @@ const RevisingPage = () => {
 
   return (
     <SuggestionsProvider>
-      <div className=" bg-[#121212] grid grid-cols-10 text-white" style={{height:'calc(100vh - 84px)'}}>
+      <div className=" bg-[#121212] grid grid-cols-10 text-white" style={{height:'calc(100vh - 56px)'}}>
        <div className=' col-span-8 overflow-y-auto'>
 
         <ChatBot 

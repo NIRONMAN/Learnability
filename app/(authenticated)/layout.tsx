@@ -11,7 +11,8 @@ import { setOnLearn } from '../GlobalRedux/Features/string/stringSlice';
 import { clearUser } from '../GlobalRedux/Features/auth/authSlice';
 import Logo from '../Components/Logo';
 import { setDark, setLight } from "@/app/GlobalRedux/Features/colours/coloursSlice";
-
+import { ThemeProvider } from 'next-themes';
+import ThemeToggle from '../Components/ThemeToggle';
 const { Option } = Select;
 
 const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => {
@@ -122,6 +123,8 @@ const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => {
   }
 
   return (
+    <ThemeProvider attribute='class'>
+
     <div className="flex h-screen">
       <aside className={`bg-gray-900 text-white transition-all duration-300 ${collapsed ? 'w-0' : 'w-1/4'}`}>
         <div className="p-4">
@@ -170,12 +173,7 @@ const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => {
               <h1 className="text-2xl font-bold ml-0 text-custom-pink">AI</h1>
             </div>
             <div className="flex items-center gap-2">
-              {isDarkTheme?<SunOutlined onClick={()=>{
-                dispatch(setLight())
-              }}/>: <MoonOutlined onClick={()=>{
-                dispatch(setDark())
-              }}/>}
-              
+              <ThemeToggle></ThemeToggle>
             {(onLearn)&&<Button onClick={handleLearnClick}>Revise from this Chat</Button>}
               <Dropdown menu={{ items: item }} trigger={['click']}>
                 <a className="flex items-center" onClick={e => {e.preventDefault()}}>
@@ -193,6 +191,7 @@ const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => {
         </main>
       </div>
     </div>
+    </ThemeProvider>
   );
 };
 

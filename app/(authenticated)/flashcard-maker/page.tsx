@@ -9,7 +9,7 @@ const page = (props: Props) => {
 
   return (
     <div  className='flex bg-slate-400 flex-col' style={{height:'calc(100vh - 56px)'}} >
-        <div className='bg-green-200 flex-grow w-full overflow-y-auto'>
+        <div className='bg-green-200 flex-grow w-full overflow-y-auto dark:bg-black'>
           
         
         </div>

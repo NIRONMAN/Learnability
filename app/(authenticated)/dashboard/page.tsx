@@ -146,7 +146,7 @@ const Page = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 text-white" style={{minHeight: 'calc(100vh - 84px)'}}>
+    <div className="flex flex-col justify-center items-center bg-gradient-to-br from-gray-900 via-purple-900 to-gray-900 text-white" style={{minHeight: 'calc(100vh - 56px)'}}>
       {isLoading ? (
         <Spin size="large" />
       ) : (
@@ -160,7 +160,7 @@ const Page = () => {
             bodyStyle={{ background: 'transparent' }}
           >
             <div className="flex flex-col items-center">
-              <Radio.Group 
+              <Radio.Group  
                 onChange={(e) => setInputMethod(e.target.value)} 
                 value={inputMethod} 
                 className="mb-6 text-white"

@@ -2,8 +2,8 @@
 
 import React, { useEffect, useState } from 'react'
 
-import MermaidChart from '../../Components/MermaidChart'
-import diagramSystemPrompt from '@/lib/diagramSystemPrompt'
+
+
 import axios from 'axios'
 import { Spin } from 'antd'
 import { useDispatch, useSelector } from 'react-redux'
