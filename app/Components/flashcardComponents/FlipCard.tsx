@@ -40,7 +40,7 @@ const FlipCard = ({ content, onExit ,resetToQuestion}: Props) => {
       onClick={flip}
     >
       <div className={`relative w-full h-full transition-transform duration-500 transform-style-3d ${isFlipped ? 'rotate-y-180' : ''}`}>
-        {isFlipped?<div className="absolute w-full h-full bg-white backface-hidden flex justify-center items-center border border-gray-300 rounded-lg shadow-2xl text-xl font-bold p-4 transform rotate-y-0">
+        {isFlipped?<div className="absolute w-full h-full bg-white backface-hidden flex justify-center items-center border border-gray-300 rounded-lg shadow-2xl text-xl font-bold p-4 transform rotate-y-0 text-black">
           {content.question}
         </div>:
         <div className="absolute w-full h-full overflow-hidden bg-purple-600 backface-hidden flex justify-center items-center border border-gray-300 rounded-lg shadow-2xl text-xl font-bold text-white p-4 transform rotate-y-180">
