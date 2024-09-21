@@ -2,7 +2,7 @@ import { GoogleGenerativeAI, HarmBlockThreshold, HarmCategory } from '@google/ge
 import { GenerateTextResult, GoogleGenerativeAIStream, StreamingTextResponse } from 'ai';
 
 const apiKeys = [
-  process.env.API_KEY1!,
+  process.env.API_KEY!,
   process.env.API_KEY2!,
   process.env.API_KEY3!,
   process.env.API_KEY4!,

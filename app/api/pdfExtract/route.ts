@@ -18,7 +18,6 @@ export async function POST(req: NextRequest, res: NextResponse) {
         NextResponse.json({ text: '', error: 'Object URL is required' });
         return;
     }
-   
   try {
     const base64Regex = /^data:application\/pdf;base64,/;
   let pdfBuffer: Buffer;
@@ -44,11 +43,11 @@ let prompt = "Generate a concise, single-line title that encapsulates the essenc
      
 
 let result = await model.generateContent(prompt)
-    //////////////////
+    //////////
     return NextResponse.json({ text:result.response.text(),context:extractedText});
   } catch (error) {
     console.log(error)
-    NextResponse.json({ text: '', error: error.message });
+    NextResponse.json({ text: 'error occured at extacting pdf', error: error.message });
   }
 }
 

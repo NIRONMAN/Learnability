@@ -15,7 +15,7 @@ const YT_DLP_PATH = `"${path.resolve("bin", "yt-dlp")}"`;
 
 const model = genAI.getGenerativeModel({
   // The Gemini 1.5 models are versatile and work with multimodal prompts
-  model: "gemini-1.5-pro",
+  model: "gemini-1.5-flash",
   generationConfig: { responseMimeType: "application/json" },
 });
 
@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
     const { stdout, stderr } = await execAsync(command);
     console.log(stdout);
 
-    const fileManager = new GoogleAIFileManager(process.env.API_KEY);
+    const fileManager = new GoogleAIFileManager(process.env.API_KEY2);
 
     const uploadResult = await fileManager.uploadFile(outputFilePath, {
       mimeType: "audio/mp3",

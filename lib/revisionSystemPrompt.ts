@@ -8,7 +8,7 @@ PDF or a Youtube video Analysis:
 - Extract the key points from the content.
 
 Question Creation:
-- Create questions that comprehensively cover all the content.For the test envionment that you are currently in only create 2 questions.
+- Create questions that comprehensively cover all the content.
 - Ensure each question is directly related to the extracted key points and covers important concepts.
 
 Interactive Teaching:

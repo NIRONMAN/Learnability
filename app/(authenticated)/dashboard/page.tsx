@@ -98,6 +98,7 @@ const Page = () => {
         const res = await axios.post("/api/pdfExtract", {
           data: { objectUrl: pdfObject },
         });
+        console.log("this is the data",res)
         setLocalContext({ context: res.data.context, title: res.data.text });
       }
       dispatch(setIsContextSet());
