@@ -62,7 +62,7 @@ const Page = () => {
         userId
       );
 
-      dispatch(addSession({ id: sessionId, title: localContext.title }));
+      dispatch(addSession({ sessionId: sessionId, title: localContext.title }));
 
       const pathname = `/${learningMode}`;
       const query = { sessionId };

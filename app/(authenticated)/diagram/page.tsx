@@ -13,7 +13,7 @@ import { getSession, sessionProps } from '@/utils/functions'
 
     type Props = {}
     
-    const page = (props: Props) => {
+    const Page = (props: Props) => {
       const router = useRouter();
       const { user, isLoadingCookie } = useSelector((state: RootState) => state.auth);
       const searchParams = useSearchParams();
@@ -77,5 +77,5 @@ import { getSession, sessionProps } from '@/utils/functions'
     )
     }
     
-    export default page
+    export default Page;
 

@@ -89,10 +89,10 @@ const updateSession = async (sessionId:string,messages:any,userId:string): Promi
 // }
 
 interface Session {
-    sessionId: string;
-    title: string;
-    sessionType: string;
-    contextType: string;
+    sessionId?: string;
+    title?: string;
+    sessionType?: string;
+    contextType?: string;
     // Add other fields as necessary
   }
   
@@ -147,4 +147,4 @@ interface Session {
 // }
 
 export { createSession, getSession, updateSession,uploadPdfToFirebase };
-export type { sessionProps };
+export type { sessionProps ,Session};

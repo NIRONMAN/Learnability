@@ -144,7 +144,7 @@ const AuthenticatedLayout = ({ children }: { children: React.ReactNode }) => {
           <ul>
             {filteredSessions.map((session) => (
               <li
-                key={session.id}
+                key={session.sessionId}
                 className="px-4 py-2 hover:bg-gray-700 cursor-pointer border border-gray-700 rounded-md m-2"
                 onClick={() => handleSessionClick(session.sessionId,session.sessionType)}
               >

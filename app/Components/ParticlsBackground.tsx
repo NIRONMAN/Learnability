@@ -17,6 +17,7 @@ const ParticlsBackground = () => {
     const isDarkTheme = useSelector((state:RootState)=> state.colour.themeDark)
     let particles = particlesConfig;
     if(isDarkTheme == false){
+        //@ts-ignore
         particles = lightThemeParticles
     }
 
@@ -42,6 +43,7 @@ const ParticlsBackground = () => {
         console.log(container);
     };
   return (
+        //@ts-ignore
      <Particles className="-z-10" options={particles} particlesLoaded={particlesLoaded}></Particles>
   )
 }

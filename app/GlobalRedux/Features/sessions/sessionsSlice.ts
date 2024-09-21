@@ -14,7 +14,7 @@ const sessionsSlice = createSlice({
       state.unshift(action.payload);
     },
     updateSession: (state, action: PayloadAction<Session>) => {
-      const index = state.findIndex(session => session.id === action.payload.id);
+      const index = state.findIndex(session => session.sessionId === action.payload.sessionId);
       if (index !== -1) {
         state[index] = action.payload;
       }
