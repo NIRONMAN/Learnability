@@ -152,7 +152,11 @@ const Page = () => {
         <Spin size="large" />
       ) : (
         <div className="w-full max-w-4xl p-8 bg-gradient-to-br from-gray-800 via-gray-900 to-gray-800 rounded-lg shadow-xl border border-indigo-500">
+          <div className=" flex flex-row justify-between">
+
           <h1 className="text-4xl font-bold mb-8 text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-400 via-purple-400 to-indigo-400">What do you want to learn today !</h1>
+          <Button onClick={()=>router.push("/Rag-test")}>RAG Mode</Button>
+          </div>
           
           <Card 
             title={<span className="text-xl font-semibold text-transparent bg-clip-text bg-gradient-to-r from-green-300 via-teal-300 to-blue-300">Add Your Study Material</span>} 

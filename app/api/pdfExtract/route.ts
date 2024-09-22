@@ -9,16 +9,17 @@ import pdf from 'pdf-parse';
 // };
 
 export async function POST(req: NextRequest, res: NextResponse) {
+  
     
+  try {
     const body=await req.json();
     const  objectUrl  =  body.data.objectUrl;
     
     
     if (!objectUrl) {
-        NextResponse.json({ text: '', error: 'Object URL is required' });
-        return;
+        return NextResponse.json({ text: '', error: 'Object URL is required' });
+        
     }
-  try {
     const base64Regex = /^data:application\/pdf;base64,/;
   let pdfBuffer: Buffer;
 
@@ -47,7 +48,7 @@ let result = await model.generateContent(prompt)
     return NextResponse.json({ text:result.response.text(),context:extractedText});
   } catch (error) {
     console.log(error)
-    NextResponse.json({ text: 'error occured at extacting pdf', error: error.message });
+   return NextResponse.json({ text: 'error occured at extacting pdf', error: error.message });
   }
 }
 
